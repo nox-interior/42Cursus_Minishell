@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 13:22:57 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/04/03 09:06:47 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/04/03 09:18:06 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,12 @@ void	ft_add_token(t_token **head, t_token *new_token)
 
 	if (!head || !new_token)
 		return ;
+	if (new_token->type == T_NONE)
+	{
+		free(new_token->value);
+		free(new_token);
+		return ;
+	}
 	if (!*head)
 	{
 		*head = new_token;
@@ -49,7 +55,7 @@ char	*ft_token_type_name(t_tok_type type)
 	if (type == T_NONE) // No estoy segura de si este es necesario o no pero por 
 	//el momento lo incluyo, tendría más sentido para gestionar errores, 
 	//pero bueno, iremos viendo si esto sirve de algo o no.
-		return ("NONE");
+		return (NULL);
 	else if (type == T_SPACES)
 		return ("SPACES");
 	else if (type == T_WORD)
@@ -109,7 +115,7 @@ static int ft_skip_spaces(char *prompt, int i)
 		i++;
 	return (i);
 }
-// Funcion para caracteres especiales < > |
+// Funcion para caracteres especiales <, >, |, <<, >>
 static t_tok_type
 // Funcion para comillas
 // Funcion para caracteres normales
