@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 13:22:57 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/04/03 08:22:01 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/04/03 08:36:13 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,12 @@ int	main(void)
 	ft_print_tokens(tokens);
 	return (0);
 }
+// Funcion para espacios en blanco
+// Funcion para caracteres especiales < > |
+// Funcion para comillas
+// Funcion para caracteres normales
 
-void	ft_tokenizer(char *prompt)
+t_token	*ft_tokenizer(char *prompt)
 {
 	t_token *token_list;
 	int i;
