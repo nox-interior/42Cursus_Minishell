@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 13:22:57 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/04/03 11:00:27 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/04/03 12:23:18 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,8 +104,41 @@ static void	ft_print_tokens(t_token *head)
 // 	return (i);
 // }
 
+// Función para variables
 // Función para pipe
+
 // Funcion para comillas
+// static void	ft_quotes(t_token **token_list, const char *prompt, int *i)
+
+#include "minishell.h"
+
+// Detecta una cadena entre comillas y añade un token STRING.
+// Devuelve el nuevo valor de i tras la comilla de cierre,
+// o -1 si no se encuentra comilla de cierre.
+int	ft_handle_quotes(t_token **tokens, const char *prompt, int i)
+{
+	int		start;
+	char	quote;
+	char	*value;
+
+	quote = prompt[i]; // puede ser ' o "
+	i++;               // saltar la comilla de apertura
+	start = i;
+	while (prompt[i] && prompt[i] != quote)
+		i++;
+	if (prompt[i] == '\0')
+	{
+		ft_putstr_fd("minishell: error: comilla sin cerrar\n", 2);
+		return (-1);
+	}
+	// Extraer el contenido entre comillas
+	value = ft_substr(prompt, start, i - start);
+	if (!value)
+		return (-1);
+	ft_add_token(tokens, ft_new_token(T_STRING, value));
+	return (i + 1); // avanzar tras la comilla de cierre
+}
+
 // Funcion para caracteres normales
 
 // Funciones para caracteres especiales <, >, <<, >>
@@ -145,6 +178,38 @@ static void	ft_dub_redir(t_token **token_list, const char c)
 	}
 }
 
+static void	ft_pipe_token(t_token **token_list)
+{
+	new_token = ft_new_token(T_PIPE, "|");
+	ft_add_token(token_list, new_token);
+}
+
+static int	ft_var_token(t_token **token_list, const char *prompt, int i)
+{
+	int	start;
+
+	t_token *new_token; // NULL?
+	start = i + 1;      // Empieza en el siguiente al $
+	i += 1;
+	if (prompt[i] == '?')
+	{
+		new_token = ft_new_token(T_VAR, "?");
+		ft_add_token(token_list, new_token);
+		return (i);
+	}
+	while (prompt[i])
+	{
+		if (!ft_isalpha(prompt[i]) || !ft_isdigit(prompt[i])
+			|| !prompt[i] == '_')
+			break ;
+		i++;
+	}
+	new_token = ft_new_token(T_VAR, ft_strdup(ft_substr(prompt, start, i
+					- start)));
+	ft_add_token(token_list, new_token);
+	return (i - 1);
+}
+
 t_token	*ft_tokenizer(const char *prompt)
 {
 	t_token	*token_list;
@@ -158,12 +223,20 @@ t_token	*ft_tokenizer(const char *prompt)
 		{
 			if (prompt[i] == prompt[i + 1])
 			{
-				ft_dub_redir(&token_list, prompt[i]); // TODO
+				ft_dub_redir(&token_list, prompt[i]);
 				i++;
 			}
 			else
 				ft_redir(&token_list, prompt[i]);
 		}
+		else if (prompt[i] == '|')
+			ft_pipe_token(&token_list);
+		else if (prompt[i] == '\'' || prompt[i] == '\"')
+			i = ft_loqueseaprimo();
+		else if (prompt[i] == '$')
+			i = ft_var_token(&token_list, prompt, i);
+		else
+			;//caract normales
 		i++;
 	}
 	return (token_list);
