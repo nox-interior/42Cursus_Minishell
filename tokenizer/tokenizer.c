@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 13:22:57 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/04/03 08:48:13 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/04/03 09:06:47 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ int	main(void)
 	ft_print_tokens(tokens);
 	return (0);
 }
-// Funcion para espacios en blanco
+// Funcion para espacios en blanco (se puede añadir a libft?)
 static int	ft_isspace(char c)
 {
 	if (c == 32 || (c >= 9 && c <= 13))
@@ -103,12 +103,18 @@ static int	ft_isspace(char c)
 }
 
 // Funcion para saltar espacios en blanco
-static void ft_skip_spaces()
+static int ft_skip_spaces(char *prompt, int i)
+{
+	while (prompt[i] && ft_isspace(prompt[i]))
+		i++;
+	return (i);
+}
 // Funcion para caracteres especiales < > |
+static t_tok_type
 // Funcion para comillas
 // Funcion para caracteres normales
 
-t_token	*ft_tokenizer(char *prompt)
+/*	*ft_tokenizer(char *prompt)
 {
 	t_token *token_list;
 	int i;
@@ -120,3 +126,4 @@ t_token	*ft_tokenizer(char *prompt)
 		// casos
 	}
 }
+*/
