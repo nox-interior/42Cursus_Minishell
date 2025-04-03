@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 13:22:57 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/04/03 08:14:42 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/04/03 08:22:01 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ char	*ft_token_type_name(t_tok_type type)
 	return ("UNKNOWN"); // mismo rollo que NONE, no sé si tendrçia más sentido devolver un error.
 }
 
+// Esta solo sirve para hacer pruebas, ni caso.
 void	ft_print_tokens(t_token *head)
 {
 	while (head)
@@ -103,7 +104,7 @@ void	ft_tokenizer(char *prompt)
 	token_list = NULL;
 	while (prompt[i])
 	{
-		if (prompt[i] == 32)
+		if (prompt[i] == 32 || (prompt[i] >= 8 && prompt[i] <= 13)) //duda: controlando los mismos whitespaces que en atoi, pero incluye \n y no sé si será un problema.
 			i++;
 		else if (prompt[i])
 	}
