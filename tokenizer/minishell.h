@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 09:55:21 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/04/02 16:34:20 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/04/03 08:42:26 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <string.h> // para strdup
 # include <readline/history.h>
 # include <readline/readline.h>
+//# include <stdbool.h> // para bool
 
 // Token codes
 typedef enum e_tok_type

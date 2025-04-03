@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 13:22:57 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/04/03 08:36:13 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/04/03 08:48:13 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,15 @@ int	main(void)
 	return (0);
 }
 // Funcion para espacios en blanco
+static int	ft_isspace(char c)
+{
+	if (c == 32 || (c >= 9 && c <= 13))
+		return (1);
+	return (0);
+}
+
+// Funcion para saltar espacios en blanco
+static void ft_skip_spaces()
 // Funcion para caracteres especiales < > |
 // Funcion para comillas
 // Funcion para caracteres normales
@@ -108,8 +117,6 @@ t_token	*ft_tokenizer(char *prompt)
 	token_list = NULL;
 	while (prompt[i])
 	{
-		if (prompt[i] == 32 || (prompt[i] >= 8 && prompt[i] <= 13)) //duda: controlando los mismos whitespaces que en atoi, pero incluye \n y no sé si será un problema.
-			i++;
-		else if (prompt[i])
+		// casos
 	}
 }
