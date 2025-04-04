@@ -6,7 +6,7 @@
 #    By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/02 16:26:23 by amarroyo          #+#    #+#              #
-#    Updated: 2025/04/02 16:31:52 by amarroyo         ###   ########.fr        #
+#    Updated: 2025/04/04 10:18:34 by amarroyo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME		= minishell_test
 SRC			= tokenizer.c
 OBJ			= $(SRC:.c=.o)
 CC			= gcc
-CFLAGS		= -Wall -Wextra -Werror
+CFLAGS		= -Wall -Wextra -Werror -g3
 LIBFT_DIR	= ../libft
 LIBFT		= $(LIBFT_DIR)/libft.a
 INCLUDES	= -I$(LIBFT_DIR)

@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 09:55:21 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/04/03 10:52:21 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/04/04 11:30:18 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@
 //# include "get_next_line.h"
 # include <readline/history.h>
 # include <readline/readline.h>
+# include <stdbool.h> // para bool
 # include <stdio.h>
 # include <stdlib.h> // malloc
 # include <string.h> // para strdup
-//# include <stdbool.h> // para bool
 
 // Token codes
 typedef enum e_tok_type
@@ -29,14 +29,15 @@ typedef enum e_tok_type
 	T_NONE, // para evitar tener tokens sin tipo, control de errores
 	T_SPACES,
 	T_WORD,
-	T_STRING,
+	T_S_QUOTE,
+	T_D_QUOTE,
 	T_VAR,
 	T_PIPE,
 	T_REDIR_IN,
 	T_REDIR_OUT,
 	T_HEREDOC,
 	T_APPEND
-}				t_tok_type;
+}					t_tok_type;
 
 // Token structure
 typedef struct s_token
@@ -47,10 +48,11 @@ typedef struct s_token
 	struct s_token	*prev;
 }					t_token;
 
-// 
-t_token	*ft_tokenizer(const char *prompt);
-int	main(void);
-void	ft_add_token(t_token **head, t_token *new_token);
-t_token	*ft_new_token(t_tok_type type, char *value);
+//
+t_token				*ft_tokenizer(const char *prompt);
+void				ft_add_token(t_token **head, t_token *new_token);
+t_token				*ft_new_token(t_tok_type type, char *value);
+void				ft_free_token_list(t_token **tokens);
+int					ft_word_token(t_token **tokens, const char *prompt, int i);
 
 #endif
