@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 13:22:57 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/04/04 11:52:19 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/04/04 12:30:03 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,14 +120,6 @@ static int	ft_isspace(char c)
 		return (1);
 	return (0);
 }
-
-// // Funcion para saltar espacios en blanco
-// static int	ft_skip_spaces(const char *prompt, int i)
-// {
-// 	while (prompt[i] && ft_isspace(prompt[i]))
-// 		i++;
-// 	return (i);
-// }
 
 // Funcion para comillas
 int	ft_quotes_token(t_token **tokens, const char *prompt, int i)
@@ -312,23 +304,8 @@ static int	ft_var_token(t_token **token_list, const char *prompt, int i)
 
 	start = i + 1;
 	i++;
-	// ⚠️ Si después del $ viene un espacio o fin de línea, NO es una variable
 	if (prompt[i] == '\0' || ft_isspace(prompt[i]))
-	{
-		// // Lo tratamos como T_WORD en lugar de T_VAR
-		// value = ft_substr(prompt, start - 1, 1); // solo "$"
-		// if (!value)
-		// 	return (-1);
-		// new_token = ft_new_token(T_WORD, value);
-		// if (!new_token)
-		// {
-		// 	free(value);
-		// 	return (-1);
-		// }
-		// ft_add_token(token_list, new_token);
-		// return (i - 1); // volvemos al espacio
 		return (ft_word_token(token_list, prompt, i - 1));
-	}
 	if (prompt[i] == '?')
 	{
 		new_token = ft_new_token(T_VAR, ft_strdup("?"));
@@ -450,15 +427,6 @@ int	ft_word_token(t_token **tokens, const char *prompt, int i)
 // 		i++;
 // 	}
 // 	return (token_list);
-// }
-
-/*
-cada bloque (<, >, |, ', ", $, etc.) consume el carácter actual y actualiza i,
-por lo que no queremos que el bucle vuelva a hacer i++ otra vez después.
-Así evitamos:
-	•	Duplicar avances de i
-	•	Evaluar innecesariamente otros if después de haber procesado el carácter
-*/
 
 t_token	*ft_tokenizer(const char *prompt)
 {
