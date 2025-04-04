@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 13:22:57 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/04/04 12:30:03 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/04/04 14:48:27 by calbar-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -492,7 +492,7 @@ int	main(void)
 	t_token	*tokens;
 
 	tokens = NULL;
-	tokens = ft_tokenizer("$   '' $  $$  $ \ \"$hola\" '$USER'|||<<<>>\'\' \"\" $$$ $$$$ ");
+	tokens = ft_tokenizer("$   '' $  $$  $ \"$hola\" '$USER'|||<<<>>\'\' \"\" $$$ $$$$ ");
 	ft_print_tokens(tokens);
 	ft_free_token_list(&tokens);
 	return (0);
