@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 09:55:21 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/04/04 12:45:31 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/04/25 09:45:40 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,8 @@ void				ft_add_token(t_token **head, t_token *new_token);
 t_token				*ft_new_token(t_tok_type type, char *value);
 void				ft_free_token_list(t_token **tokens);
 int					ft_word_token(t_token **tokens, const char *prompt, int i);
+
+// Eliminar: funciones para pruebas
+char				*ft_token_type_name(t_tok_type type);
 
 #endif

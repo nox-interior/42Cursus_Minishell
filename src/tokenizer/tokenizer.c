@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 13:22:57 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/04/07 09:20:54 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/04/25 09:45:12 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ Advertencia menor:
 			cuidado con el "UNKNOWN" y el NULL.
 	Podría producir un segfault en printf("%s", NULL).*/
 
-static char	*ft_token_type_name(t_tok_type type)
+char	*ft_token_type_name(t_tok_type type)
 {
 	if (type == T_NONE)
 		return (NULL);
@@ -103,15 +103,15 @@ static char	*ft_token_type_name(t_tok_type type)
 }
 
 // Esta solo sirve para hacer pruebas, ni caso.
-static void	ft_print_tokens(t_token *head)
-{
-	while (head)
-	{
-		printf("Token: [%-10s] -> \"%s\"\n", ft_token_type_name(head->type),
-			head->value);
-		head = head->next;
-	}
-}
+// static void	ft_print_tokens(t_token *head)
+// {
+// 	while (head)
+// 	{
+// 		printf("Token: [%-10s] -> \"%s\"\n", ft_token_type_name(head->type),
+// 			head->value);
+// 		head = head->next;
+// 	}
+// }
 
 // Funcion para espacios en blanco (se puede añadir a libft?)
 static int	ft_isspace(char c)
@@ -488,13 +488,13 @@ t_token	*ft_tokenizer(const char *prompt)
 	return (token_list);
 }
 
-int	main(void)
-{
-	t_token	*tokens;
+// int	main(void)
+// {
+// 	t_token	*tokens;
 
-	tokens = NULL;
-	tokens = ft_tokenizer("$   '' $  $$  $ \"$hola\" '$USER'|||<<<>>\'\' \"\" $$$ $$$$ ");
-	ft_print_tokens(tokens);
-	ft_free_token_list(&tokens);
-	return (0);
-}
+// 	tokens = NULL;
+// 	tokens = ft_tokenizer("$   '' $  $$  $ \"$hola\" '$USER'|||<<<>>\'\' \"\" $$$ $$$$ ");
+// 	ft_print_tokens(tokens);
+// 	ft_free_token_list(&tokens);
+// 	return (0);
+// }
