@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 09:55:21 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/04/25 09:45:40 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/04/25 10:25:31 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ typedef struct s_token
 	struct s_token	*prev;
 }					t_token;
 
-//
+// Tokenizer
 t_token				*ft_tokenizer(const char *prompt);
 void				ft_add_token(t_token **head, t_token *new_token);
 t_token				*ft_new_token(t_tok_type type, char *value);
