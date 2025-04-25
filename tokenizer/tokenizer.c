@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 13:22:57 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/04/04 12:59:36 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/04/07 09:20:54 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -230,7 +230,7 @@ static void	ft_pipe_token(t_token **token_list)
 }
 
 // Función para variables
-// static int	ft_var_token(t_token **token_list, const char *prompt, int i)
+/* // static int	ft_var_token(t_token **token_list, const char *prompt, int i)
 // {
 // 	int		start;
 // 	t_token	*new_token;// NULL?
@@ -295,6 +295,7 @@ static void	ft_pipe_token(t_token **token_list)
 // 	ft_add_token(token_list, new_token);
 // 	return (i - 1);
 // }
+*/
 
 static int	ft_var_token(t_token **token_list, const char *prompt, int i)
 {
