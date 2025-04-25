@@ -6,7 +6,7 @@
 #    By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/02 16:26:23 by amarroyo          #+#    #+#              #
-#    Updated: 2025/04/25 09:41:13 by amarroyo         ###   ########.fr        #
+#    Updated: 2025/04/25 10:18:24 by amarroyo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,16 +26,17 @@ LIBFT_DIR	= libft/
 LIBFT		= $(LIBFT_DIR)/libft.a
 
 # Source files
+MAIN		= $(SRC_DIR)main/main.c
+
 TOKENIZER	= $(SRC_DIR)tokenizer/tokenizer.c
 
 #PARSER		= $(SRC_DIR)parser/
 
 #EXECUTOR	= $(SRC_DIR)executor/
 
-MAIN		= main.c
-
 SRC			= $(MAIN) $(TOKENIZER) #$(PARSER) $(EXECUTOR)
 
+# Object files
 OBJ			= $(patsubst $(SRC_DIR)%.c,$(OBJ_DIR)%.o,$(SRC))
 
 # Compilation Rules
@@ -51,6 +52,7 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@mkdir -p $(@D)
 	$(CC) $(CFLAGS) -c $< -o $@
 
+# Cleaning Rules
 clean:
 	make -C $(LIBFT_DIR) clean
 	@$(RM) -r $(OBJ_DIR)
