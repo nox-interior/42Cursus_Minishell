@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 09:55:21 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/04/25 11:06:06 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/04/28 11:00:24 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define MINISHELL_H
 
 # include "../libft/inc/libft.h"
-//# include "ft_printf.h"
-//# include "get_next_line.h"
+# include "../libft/inc/ft_printf.h"
+# include "../libft/inc/get_next_line.h"
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <stdbool.h> // para bool
@@ -65,6 +65,12 @@ void				ft_add_token(t_token **head, t_token *new_token);
 t_token				*ft_new_token(t_tok_type type, char *value);
 void				ft_free_token_list(t_token **tokens);
 int					ft_word_token(t_token **tokens, const char *prompt, int i);
+
+// Parser
+t_command			*ft_create_command(t_token **current);
+t_command			*ft_parse_command(t_token *token_list);
+void				ft_free_command_partial(t_command *cmd, t_list *args);
+void				ft_free_command_list(t_command **cmd_list);
 
 // Eliminar: funciones para pruebas
 char				*ft_token_type_name(t_tok_type type);

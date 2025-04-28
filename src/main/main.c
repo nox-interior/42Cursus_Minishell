@@ -6,11 +6,11 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 09:42:39 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/04/25 09:44:07 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/04/28 12:06:08 by calbar-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "minishell.h"
+# include "../../inc/minishell.h"
 
 static void	ft_print_tokens(t_token *head)
 {
@@ -25,10 +25,37 @@ static void	ft_print_tokens(t_token *head)
 int	main(void)
 {
 	t_token	*tokens;
+	t_command *comandos;
+	char *cmd_line;
+	int i = 0;
 
+	cmd_line = get_next_line(0);
 	tokens = NULL;
-	tokens = ft_tokenizer("$   '' $  $$  $ \"$hola\" '$USER'|||<<<>>\'\' \"\" $$$ $$$$ ");
+	tokens = ft_tokenizer(cmd_line);
 	ft_print_tokens(tokens);
-	ft_free_token_list(&tokens);
+	comandos = ft_parse_command(tokens);
+	if (!comandos)
+		printf("cagaste\n");
+	else
+		while (comandos)
+		{
+			printf("[CMD %d]\n", i);
+			while ((*comandos->argv))
+			{
+				printf("%s\n", (*comandos->argv));
+				comandos->argv++;
+			}
+			if (comandos->infile)
+				printf("%s\n", comandos->infile);
+			if (comandos->outfile)
+				printf("%s\n", comandos->outfile);
+			if (comandos->append)
+				printf("(append)\n");
+			if (comandos->heredoc)
+				printf("(heredoc)\n");
+			comandos = comandos->next;
+			i++;
+		}
+	//ft_free_token_list(tokens); TODO: en el parser y en los frees de errores del parser
 	return (0);
 }

@@ -6,7 +6,7 @@
 #    By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/02 16:26:23 by amarroyo          #+#    #+#              #
-#    Updated: 2025/04/25 10:18:24 by amarroyo         ###   ########.fr        #
+#    Updated: 2025/04/28 11:51:43 by calbar-c         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,11 +30,11 @@ MAIN		= $(SRC_DIR)main/main.c
 
 TOKENIZER	= $(SRC_DIR)tokenizer/tokenizer.c
 
-#PARSER		= $(SRC_DIR)parser/
+PARSER		= $(SRC_DIR)parser/parser_01.c
 
 #EXECUTOR	= $(SRC_DIR)executor/
 
-SRC			= $(MAIN) $(TOKENIZER) #$(PARSER) $(EXECUTOR)
+SRC			= $(MAIN) $(TOKENIZER) $(PARSER) #$(EXECUTOR)
 
 # Object files
 OBJ			= $(patsubst $(SRC_DIR)%.c,$(OBJ_DIR)%.o,$(SRC))
