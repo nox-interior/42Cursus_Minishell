@@ -26,7 +26,7 @@ int	ft_printf(const char *format, ...)
 		if (format[i] == '%')
 		{
 			i++;
-			printlen += ft_specifiers(format[i], arg_ptr);
+			printlen += ft_specifiers(format[i], &arg_ptr);
 		}
 		else
 			printlen += write(1, &format[i], 1);
