@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 09:55:21 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/04/28 11:00:24 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/05/15 18:04:11 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,13 @@ typedef enum e_tok_type
 	T_REDIR_IN,
 	T_REDIR_OUT,
 	T_HEREDOC,
-	T_APPEND
+	T_APPEND,
+	T_SEMICOLON,
+	T_EXCLAMATION,
+	T_AMPERSAND,
+	T_AND,
+	T_OR,
+	T_INVALID
 }					t_tok_type;
 
 // Token Structure: lexical level

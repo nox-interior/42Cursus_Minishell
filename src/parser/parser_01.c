@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 12:26:15 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/04/25 12:27:43 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/05/15 18:07:48 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,12 @@ static int	ft_is_redirection(t_tok_type type)
 {
 	return (type == T_REDIR_IN || type == T_REDIR_OUT || type == T_HEREDOC
 		|| type == T_APPEND);
+}
+
+static int ft_is_special_character(t_tok_type type)
+{
+	return (type == T_SEMICOLON || type == T_EXCLAMATION || type == T_AMPERSAND 
+		|| type == T_AND || type == T_OR || type == T_INVALID);
 }
 
 static void	ft_init_command(t_command *cmd)
@@ -141,6 +147,8 @@ static int	ft_is_valid_token_sequence(t_token *tokens)
 		return (0);
 	while (current)
 	{
+		if (ft_is_special_character(current->type))
+			return (0);
 		if (current->type == T_PIPE)
 		{
 			if (!current->next || current->next->type == T_PIPE)

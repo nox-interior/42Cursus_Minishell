@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 13:22:57 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/04/25 09:45:12 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/05/15 18:12:48 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,18 @@ char	*ft_token_type_name(t_tok_type type)
 		return ("HEREDOC");
 	else if (type == T_APPEND)
 		return ("APPEND");
+	else if (type == T_SEMICOLON)
+		return ("SEMICOLON");
+	else if (type == T_EXCLAMATION)
+		return ("EXCLAMATION");
+	else if (type == T_AMPERSAND)
+		return ("AMPERSAND");
+	else if (type == T_AND)
+		return ("AND");
+	else if (type == T_OR)
+		return ("OR");
+	else if (type == T_INVALID)
+		return ("INVALID");
 	return ("UNKNOWN");
 }
 
@@ -429,6 +441,68 @@ int	ft_word_token(t_token **tokens, const char *prompt, int i)
 // 	}
 // 	return (token_list);
 
+// t_token	*ft_tokenizer(const char *prompt)
+// {
+// 	t_token	*token_list;
+// 	int		i;
+
+// 	i = 0;
+// 	token_list = NULL;
+// 	while (prompt[i])
+// 	{
+// 		{
+// 			if (ft_isspace(prompt[i]))
+// 			{
+// 				i++;
+// 				continue ; //check -> sin esto puede dar pbls si hay un if más abajo
+// 			}
+// 		}
+// 		if (prompt[i] == '<' || prompt[i] == '>')
+// 		{
+// 			if (prompt[i] == prompt[i + 1])
+// 			{
+// 				ft_dub_redir(&token_list, prompt[i]);
+// 				i++;
+// 			}
+// 			else
+// 				ft_redir(&token_list, prompt[i]);
+// 			i++;
+// 		}
+// 		else if (prompt[i] == '|')
+// 		{
+// 			ft_pipe_token(&token_list);
+// 			i++;
+// 		}
+// 		else if (prompt[i] == '\'' || prompt[i] == '\"')
+// 		{
+// 			i = ft_quotes_token(&token_list, prompt, i);
+// 			if (i == -1)
+// 			{
+// 				ft_free_token_list(&token_list);
+// 				return (NULL);
+// 			}
+// 		}
+// 		else if (prompt[i] == '$')
+// 		{
+// 			i = ft_var_token(&token_list, prompt, i);
+// 			if (i == -1)
+// 			{
+// 				ft_free_token_list(&token_list);
+// 				return (NULL);
+// 			}
+// 			i++;
+// 		}
+// 		else if (ft_is_word_char(prompt[i]))
+// 			i = ft_word_token(&token_list, prompt, i);
+// 		if (i == -1)
+// 		{
+// 			ft_free_token_list(&token_list);
+// 			return (NULL);
+// 		}
+// 	}
+// 	return (token_list);
+// }
+
 t_token	*ft_tokenizer(const char *prompt)
 {
 	t_token	*token_list;
@@ -438,9 +512,10 @@ t_token	*ft_tokenizer(const char *prompt)
 	token_list = NULL;
 	while (prompt[i])
 	{
+		if (ft_isspace(prompt[i]))
 		{
-			if (ft_isspace(prompt[i]))
-				i++;
+			i++;
+			continue;
 		}
 		if (prompt[i] == '<' || prompt[i] == '>')
 		{
@@ -455,7 +530,38 @@ t_token	*ft_tokenizer(const char *prompt)
 		}
 		else if (prompt[i] == '|')
 		{
-			ft_pipe_token(&token_list);
+			if (prompt[i + 1] == '|')
+			{
+				ft_add_token(&token_list, ft_new_token(T_OR, ft_strdup("||")));
+				i += 2;
+			}
+			else
+			{
+				ft_pipe_token(&token_list);
+				i++;
+			}
+		}
+		else if (prompt[i] == '&')
+		{
+			if (prompt[i + 1] == '&')
+			{
+				ft_add_token(&token_list, ft_new_token(T_AND, ft_strdup("&&")));
+				i += 2;
+			}
+			else
+			{
+				ft_add_token(&token_list, ft_new_token(T_AMPERSAND, ft_strdup("&")));
+				i++;
+			}
+		}
+		else if (prompt[i] == ';')
+		{
+			ft_add_token(&token_list, ft_new_token(T_SEMICOLON, ft_strdup(";")));
+			i++;
+		}
+		else if (prompt[i] == '!')
+		{
+			ft_add_token(&token_list, ft_new_token(T_EXCLAMATION, ft_strdup("!")));
 			i++;
 		}
 		else if (prompt[i] == '\'' || prompt[i] == '\"')
@@ -478,11 +584,25 @@ t_token	*ft_tokenizer(const char *prompt)
 			i++;
 		}
 		else if (ft_is_word_char(prompt[i]))
-			i = ft_word_token(&token_list, prompt, i);
-		if (i == -1)
 		{
-			ft_free_token_list(&token_list);
-			return (NULL);
+			i = ft_word_token(&token_list, prompt, i);
+			if (i == -1)
+			{
+				ft_free_token_list(&token_list);
+				return (NULL);
+			}
+		}
+		else
+		{
+			// Carácter desconocido: marcar como T_INVALID
+			char *str = ft_substr(prompt, i, 1);
+			if (!str)
+			{
+				ft_free_token_list(&token_list);
+				return (NULL);
+			}
+			ft_add_token(&token_list, ft_new_token(T_INVALID, str));
+			i++;
 		}
 	}
 	return (token_list);
