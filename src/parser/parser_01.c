@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 12:26:15 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/05/16 11:31:26 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/05/16 12:08:05 by calbar-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,15 +151,11 @@ static int	ft_is_valid_token_sequence(t_token *tokens)
 		if (ft_is_special_character(current->type))
 			return (0);
 		if (current->type == T_PIPE)
-		{
 			if (!current->next || current->next->type == T_PIPE)
 				return (0);
-		}
 		if (ft_is_redirection(current->type))
-		{
 			if (!current->next || !ft_is_valid_arg_token(current->next->type))
 				return (0);
-		}
 		if (current->type == T_NONE)
 			return (0);
 		current = current->next;
