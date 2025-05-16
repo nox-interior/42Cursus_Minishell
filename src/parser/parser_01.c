@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 12:26:15 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/05/15 18:07:48 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/05/16 11:14:00 by calbar-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,8 @@ static int	ft_process_redirection(t_command *cmd, t_token **current)
 {
 	char	*redir_target;
 
-	if (!(*current)->next || (*current)->next->type != T_WORD)
+	if (!(*current)->next
+			|| !ft_is_valid_arg_token((*current)->next->type))
 		return (-1);
 	redir_target = ft_strdup((*current)->next->value);
 	if (!redir_target)
