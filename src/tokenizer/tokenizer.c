@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 13:22:57 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/05/15 18:12:48 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/05/16 12:20:55 by calbar-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -309,23 +309,34 @@ static void	ft_pipe_token(t_token **token_list)
 // }
 */
 
+static int	ft_is_exit_tok(t_token **token_list, t_token *new_token, int i)
+{	
+	new_token = ft_new_token(T_VAR, ft_strdup("?"));
+	if (!new_token)
+		return (-1);
+	ft_add_token(token_list, new_token);
+	return (i);
+}
+
 static int	ft_var_token(t_token **token_list, const char *prompt, int i)
 {
 	int		start;
 	char	*value;
 	t_token	*new_token;
 
-	start = i + 1;
-	i++;
-	if (prompt[i] == '\0' || ft_isspace(prompt[i]))
+	new_token = NULL;
+	start = i + 1; // start se salta el $
+	i++; // saltamos el $
+	if (prompt[i] == '\0' || ft_isspace(prompt[i])) // el token = "$" (WORD)
 		return (ft_word_token(token_list, prompt, i - 1));
 	if (prompt[i] == '?')
 	{
-		new_token = ft_new_token(T_VAR, ft_strdup("?"));
+		return(ft_is_exit_tok(token_list, new_token, i)); // si todo va bien devuelve i + 1
+		/*new_token = ft_new_token(T_VAR, ft_strdup("?"));
 		if (!new_token)
 			return (-1);
 		ft_add_token(token_list, new_token);
-		return (i);
+		return (i);*/
 	}
 	while (prompt[i] && (ft_isalpha(prompt[i]) || ft_isdigit(prompt[i])
 			|| prompt[i] == '_'))
@@ -515,10 +526,11 @@ t_token	*ft_tokenizer(const char *prompt)
 		if (ft_isspace(prompt[i]))
 		{
 			i++;
-			continue;
+			continue ; // Revisar
 		}
 		if (prompt[i] == '<' || prompt[i] == '>')
 		{
+			//i = handle_redirection(&token_list, prompt, i); //TODO
 			if (prompt[i] == prompt[i + 1])
 			{
 				ft_dub_redir(&token_list, prompt[i]);
