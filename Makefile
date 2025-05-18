@@ -6,7 +6,7 @@
 #    By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/02 16:26:23 by amarroyo          #+#    #+#              #
-#    Updated: 2025/04/28 11:51:43 by calbar-c         ###   ########.fr        #
+#    Updated: 2025/05/18 13:03:24 by amarroyo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,10 @@ MAIN		= $(SRC_DIR)main/main.c
 
 TOKENIZER	= $(SRC_DIR)tokenizer/tokenizer.c
 
-PARSER		= $(SRC_DIR)parser/parser_01.c
+PARSER		= $(SRC_DIR)parser/01_main_parser.c \
+			  $(SRC_DIR)parser/02_aux_parser.c \
+			  $(SRC_DIR)parser/03_command_parser.c \
+			  $(SRC_DIR)parser/04_free_parser.c
 
 #EXECUTOR	= $(SRC_DIR)executor/
 
