@@ -81,7 +81,7 @@ static char	*ft_type_invalid(t_tok_type type)
 		return ("AND");
 	else if (type == T_OR)
 		return ("OR");
-	else if (type == T_INVALID)
+	else
 		return ("INVALID");
 }
 
@@ -115,7 +115,7 @@ char	*ft_token_type_name(t_tok_type type)
 	else if (type == T_APPEND)
 		return ("APPEND");
 	else if (type == T_SEMICOLON || type == T_EXCLAMATION
-				|| type == T_AMPERSAND || type = T_AND || type == T_OR
+				|| type == T_AMPERSAND || type == T_AND || type == T_OR
 				|| type == T_INVALID)
 		return (ft_type_invalid(type));
 	return ("UNKNOWN");
