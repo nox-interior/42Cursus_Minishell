@@ -12,7 +12,7 @@
 
 # include "../../inc/minishell.h"
 
-static void	ft_print_tokens(t_token *head)
+/*static void	ft_print_tokens(t_token *head)
 {
 	while (head)
 	{
@@ -57,5 +57,25 @@ int	main(void)
 			i++;
 		}
 	//ft_free_token_list(tokens); TODO: en el parser y en los frees de errores del parser
+	return (0);
+}*/
+
+static void	minishell_loop(void)
+{
+	char	*prompt;
+
+	while (1)
+	{
+		prompt = readline("$ ");
+		printf("La línea ingresada es: %s\n", prompt);
+	}
+}
+
+int	main(int argc, char **argv)// char **env)
+{
+	(void)argc;
+	(void)argv;
+	//isatty
+	minishell_loop();
 	return (0);
 }

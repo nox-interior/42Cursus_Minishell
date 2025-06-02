@@ -16,6 +16,7 @@ NAME		= minishell
 # Compiler and Flags
 CC			= gcc
 CFLAGS		= -Wall -Wextra -Werror -g3 -I$(INC_DIR) -I$(LIBFT_DIR)
+LDFLAGS		= -lreadline
 RM			= rm -f
 
 # Directories
@@ -46,7 +47,7 @@ OBJ			= $(patsubst $(SRC_DIR)%.c,$(OBJ_DIR)%.o,$(SRC))
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -o $(NAME) $(LDFLAGS)
 
 $(LIBFT):
 	make -C $(LIBFT_DIR)
