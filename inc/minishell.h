@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 09:55:21 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/06/03 12:50:13 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/06/03 12:50:42 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void				ft_free_command_list(t_command **cmd_list);
 t_command			*ft_parse_command(t_token *token_list);
 
 // Main
-void	ft_minishell_loop(char **envp, int *exit_status);
+void				ft_minishell_loop(char **envp, int *exit_status);
 
 // Eliminar: funciones para pruebas
 char				*ft_token_type_name(t_tok_type type);
