@@ -6,11 +6,12 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 12:26:15 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/05/18 12:48:49 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/06/03 11:12:50 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
 
 int	ft_is_valid_token_sequence(t_token *tokens)
 {

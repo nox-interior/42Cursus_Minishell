@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 13:22:57 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/05/16 12:20:55 by calbar-c         ###   ########.fr       */
+/*   Updated: 2025/06/03 11:09:14 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -531,6 +531,7 @@ static int	handle_redirection(t_token **token_list, const char *prompt, int i)
 	i++;
 	return (i);
 }
+
 static int	handle_pipe(t_token **token_list, const char *prompt, int i)
 {
 	if (prompt[i + 1] == '|')
@@ -545,6 +546,7 @@ static int	handle_pipe(t_token **token_list, const char *prompt, int i)
 	}
 	return (i);
 }
+
 static int	handle_special_inv(t_token **token_list, const char *prompt, int i)
 {
 	if (prompt[i] == '&')
@@ -572,6 +574,7 @@ static int	handle_special_inv(t_token **token_list, const char *prompt, int i)
 	}
 	return (i);
 }
+
 static int	handle_invalid(t_token **token_list, const char *prompt, int i)
 {
 	char	*str;
@@ -601,6 +604,7 @@ static int	handle_special(t_token **token_list, const char *prompt, int i)
 		i = ft_var_token(token_list, prompt, i);
 	return (i);
 }
+
 static int	ft_create_token(t_token **token_list, const char *prompt, int i)
 {
 	if (prompt[i] == '<' || prompt[i] == '>' || prompt[i] == '|'
