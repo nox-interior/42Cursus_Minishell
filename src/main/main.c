@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 09:42:39 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/06/03 12:43:43 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/06/03 12:48:09 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ static t_token	*ft_read_and_tokenize(char **line)
 	return (tokens);
 }
 
-static void	parse_and_execute(t_token *tokens, char **envp, int *exit_status)
+static void	ft_parse_and_execute(t_token *tokens, char **envp, int *exit_status)
 {
 	t_command	*commands;
 
@@ -115,7 +115,7 @@ static void	parse_and_execute(t_token *tokens, char **envp, int *exit_status)
 	ft_free_command_list(&commands);
 }
 
-void	minishell_loop(char **envp, int *exit_status)
+void	ft_minishell_loop(char **envp, int *exit_status)
 {
 	char		*line;
 	t_token		*tokens;
