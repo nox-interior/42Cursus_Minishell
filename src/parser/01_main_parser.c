@@ -12,28 +12,41 @@
 
 #include "minishell.h"
 
+static int	ft_syntax_error(const char *token, int *exit_status)
+{
+	ft_printf("minishell: syntax error near unexpected token `%s'\n",
+		(char *)token);
+	*exit_status = 258;
+	return (0);
+}
+static int	ft_unexpected_error(int *exit_status)
+{
+	ft_printf("minishell: unexpected error creating token\n");
+	*exit_status = 2;
+	return (0);
+}
 
-int	ft_is_valid_token_sequence(t_token *tokens)
+int	ft_is_valid_token_sequence(t_token *tokens, int *exit_status)
 {
 	t_token	*current;
 
 	current = tokens;
 	if (!current)
-		return (0);
+		return (ft_unexpected_error(exit_status));
 	if (current->type == T_PIPE)
-		return (0);
+		return (ft_syntax_error("|", exit_status));
 	while (current)
 	{
 		if (ft_is_special_character(current->type))
-			return (0);
+			return (ft_syntax_error(current->value, exit_status));
 		if (current->type == T_PIPE)
 			if (!current->next || current->next->type == T_PIPE)
-				return (0);
+				return (ft_syntax_error("|", exit_status));
 		if (ft_is_redirection(current->type))
 			if (!current->next || !ft_is_valid_arg_token(current->next->type))
-				return (0);
+				return (ft_syntax_error("newline", exit_status));
 		if (current->type == T_NONE)
-			return (0);
+			return (ft_unexpected_error(exit_status));
 		current = current->next;
 	}
 	return (1);
@@ -60,13 +73,13 @@ int	ft_add_command_to_list(t_command **head, t_command **tail,
 	return (0);
 }
 
-t_command	*ft_parse_command(t_token *token_list)
+t_command	*ft_parse_command(t_token *token_list, int *exit_status)
 {
 	t_token		*current;
 	t_command	*head;
 	t_command	*tail;
 
-	if (!ft_is_valid_token_sequence(token_list))
+	if (!ft_is_valid_token_sequence(token_list, exit_status))
 		return (NULL);
 	current = token_list;
 	head = NULL;

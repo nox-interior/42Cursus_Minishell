@@ -83,12 +83,12 @@ int					ft_process_redirection(t_command *cmd, t_token **current);
 int					ft_parse_command_body(t_command *cmd, t_token **current,
 						t_list **args);
 t_command			*ft_create_command(t_token **current);
-int					ft_is_valid_token_sequence(t_token *tokens);
+int					ft_is_valid_token_sequence(t_token *tokens, int *exit_status);
 int					ft_add_command_to_list(t_command **head, t_command **tail,
 						t_token **current);
 void				ft_free_command_partial(t_command *cmd, t_list *args);
 void				ft_free_command_list(t_command **cmd_list);
-t_command			*ft_parse_command(t_token *token_list);
+t_command			*ft_parse_command(t_token *token_list, int *exit_status);
 
 // Main
 void				ft_minishell_loop(char **envp, int *exit_status);

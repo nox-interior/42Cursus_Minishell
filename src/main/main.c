@@ -107,7 +107,7 @@ static void	ft_parse_and_execute(t_token *tokens, char **envp, int *exit_status)
 {
 	t_command	*commands;
 
-	commands = ft_parse_command(tokens);
+	commands = ft_parse_command(tokens, exit_status);
 	exit_status = 0;
 	if (exit_status != 0) //QUITAR
 		return ;
