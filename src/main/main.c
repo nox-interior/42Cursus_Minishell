@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 09:42:39 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/06/03 11:35:38 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/06/03 12:43:43 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ void	minishell_loop(char **envp, int *exit_status)
 
 	while (1)
 	{
-		tokens = read_and_tokenize(&line);
+		tokens = ft_read_and_tokenize(&line);
 		if (ft_should_exit(line))
 			break ;
 		if (!tokens)
