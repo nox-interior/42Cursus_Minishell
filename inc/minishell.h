@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 09:55:21 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/06/03 12:50:42 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/06/04 13:51:49 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,31 @@ typedef struct s_command
 t_token				*ft_tokenizer(const char *prompt);
 void				ft_add_token(t_token **head, t_token *new_token);
 t_token				*ft_new_token(t_tok_type type, char *value);
-void				ft_free_token_list(t_token **tokens);
+int					ft_is_exit_tok(t_token **token_list, t_token *new_token,
+						int i);
+int					ft_create_var_token(t_token **t_list, t_token *token,
+						char *value);
+int					ft_create_token(t_token **token_list, const char *prompt,
+						int i);
+bool				ft_is_word_char(char c);
+int					ft_quotes_token(t_token **tokens, const char *prompt,
+						int i);
 int					ft_word_token(t_token **tokens, const char *prompt, int i);
+int					handle_redirection(t_token **token_list, const char *prompt,
+						int i);
+int					handle_pipe(t_token **token_list, const char *prompt,
+						int i);
+int					handle_special(t_token **token_list, const char *prompt,
+						int i);
+int					handle_invalid(t_token **token_list, const char *prompt,
+						int i);
+int					handle_special_inv(t_token **token_list, const char *prompt,
+						int i);
+void				ft_pipe_token(t_token **token_list);
+void				ft_dub_redir(t_token **token_list, const char c);
+void				ft_redir(t_token **token_list, const char c);
+int					ft_var_token(t_token **token_list, const char *prompt,
+						int i);
 
 // Parser
 int					ft_is_valid_arg_token(t_tok_type type);
@@ -83,17 +106,20 @@ int					ft_process_redirection(t_command *cmd, t_token **current);
 int					ft_parse_command_body(t_command *cmd, t_token **current,
 						t_list **args);
 t_command			*ft_create_command(t_token **current);
-int					ft_is_valid_token_sequence(t_token *tokens, int *exit_status);
+int					ft_is_valid_token_sequence(t_token *tokens,
+						int *exit_status);
 int					ft_add_command_to_list(t_command **head, t_command **tail,
 						t_token **current);
 void				ft_free_command_partial(t_command *cmd, t_list *args);
 void				ft_free_command_list(t_command **cmd_list);
 t_command			*ft_parse_command(t_token *token_list, int *exit_status);
 
+// Executor
+
+// Exit and Free
+void				ft_free_token_list(t_token **tokens);
+
 // Main
 void				ft_minishell_loop(char **envp, int *exit_status);
-
-// Eliminar: funciones para pruebas
-char				*ft_token_type_name(t_tok_type type);
 
 #endif
