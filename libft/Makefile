@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: amarroyo <amarroyo@student.42madrid.com    +#+  +:+       +#+         #
+#    By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/08 14:13:37 by amarroyo          #+#    #+#              #
-#    Updated: 2024/05/08 14:24:51 by amarroyo         ###   ########.fr        #
+#    Updated: 2025/06/04 12:02:55 by amarroyo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,8 @@ FTIS_DIR		=	$(SRC_DIR)ft_is/ft_isalnum.c \
 					$(SRC_DIR)ft_is/ft_isalpha.c \
 					$(SRC_DIR)ft_is/ft_isascii.c \
 					$(SRC_DIR)ft_is/ft_isdigit.c \
-					$(SRC_DIR)ft_is/ft_isprint.c 
+					$(SRC_DIR)ft_is/ft_isprint.c \
+					$(SRC_DIR)ft_is/ft_isspace.c
 
 FTMEM_DIR		=	$(SRC_DIR)ft_mem/ft_bzero.c \
 					$(SRC_DIR)ft_mem/ft_calloc.c \
