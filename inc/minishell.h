@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 09:55:21 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/06/11 11:12:15 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/06/11 12:27:32 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,12 @@ void				ft_dub_redir(t_token **token_list, const char c);
 void				ft_redir(t_token **token_list, const char c);
 int					ft_var_token(t_token **token_list, const char *prompt,
 						int i);
+
+// Variable expansion
+char				*ft_var_with_dollar(const char *prompt, int start, int end);
+char				*ft_strjoin_char(char *str, char c);
+char				*ft_expand_value(char *input, char **envp);
+void				ft_expand_variables(t_token *token_list, char **envp);
 
 // Parser
 int					ft_is_valid_arg_token(t_tok_type type);

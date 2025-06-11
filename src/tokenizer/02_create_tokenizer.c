@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 13:45:46 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/06/04 13:54:53 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/06/11 12:47:15 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,11 @@ void	ft_add_token(t_token **head, t_token *new_token)
 
 int	ft_is_exit_tok(t_token **token_list, t_token *new_token, int i)
 {
-	new_token = ft_new_token(T_VAR, ft_strdup("?"));
+	new_token = ft_new_token(T_VAR, ft_strdup("$?"));
 	if (!new_token)
 		return (-1);
 	ft_add_token(token_list, new_token);
-	return (i);
+	return (i + 1);
 }
 
 int	ft_create_var_token(t_token **t_list, t_token *token, char *value)

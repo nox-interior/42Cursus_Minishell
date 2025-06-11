@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 09:42:39 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/06/11 11:14:38 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/06/11 12:39:51 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,12 @@ static t_token	*ft_read_and_tokenize(char **line)
 	if (isatty(STDIN_FILENO) && **line)
 		add_history(*line);
 	tokens = ft_tokenizer(*line);
+	if (!tokens)
+	{
+		ft_set_exit_status(2);
+		free(*line);
+		return (NULL);
+	}
 	free(*line);
 	return (tokens);
 }
@@ -107,6 +113,16 @@ static void	ft_parse_and_execute(t_token *tokens, char **envp, int *exit_status)
 {
 	t_command	*commands;
 
+	ft_expand_variables(tokens, envp);
+	//ELIMINAR BLOQUE; SOLO PARA TESTEO
+	t_token *debug = tokens;
+	printf("Tokens tras expansión:\n");
+	while (debug)
+	{
+		printf("  Token: [%d] -> \"%s\"\n", debug->type, debug->value);
+		debug = debug->next;
+	}
+	//HASTA AQUÍ
 	commands = ft_parse_command(tokens, exit_status);
 	if (ft_get_exit_status() != 0)
 		return ;
