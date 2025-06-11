@@ -6,7 +6,7 @@
 #    By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/02 16:26:23 by amarroyo          #+#    #+#              #
-#    Updated: 2025/06/04 13:49:45 by amarroyo         ###   ########.fr        #
+#    Updated: 2025/06/11 11:11:32 by amarroyo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ TOKENIZER	= $(SRC_DIR)tokenizer/01_tokenizer.c \
 			  $(SRC_DIR)tokenizer/02_create_tokenizer.c \
 			  $(SRC_DIR)tokenizer/03_types_tokenizer.c \
 			  $(SRC_DIR)tokenizer/04_sp_types_tokenizer.c \
-			  $(SRC_DIR)tokenizer/05_handles_tokenizer.c \
+			  $(SRC_DIR)tokenizer/05_handles_tokenizer.c 
 
 PARSER		= $(SRC_DIR)parser/01_main_parser.c \
 			  $(SRC_DIR)parser/02_aux_parser.c \
@@ -42,9 +42,12 @@ PARSER		= $(SRC_DIR)parser/01_main_parser.c \
 
 #EXECUTOR	= $(SRC_DIR)executor/
 
-EXIT		= $(SRC_DIR)exit/01_free.c
+EXIT		= $(SRC_DIR)exit/01_free.c \
+			  $(SRC_DIR)exit/02_exit.c
 
-SRC			= $(MAIN) $(TOKENIZER) $(PARSER) $(EXIT) #$(EXECUTOR)
+SIGNALS		= $(SRC_DIR)signals/01_signals.c
+
+SRC			= $(MAIN) $(TOKENIZER) $(PARSER) $(EXIT) $(SIGNALS) #$(EXECUTOR)
 
 # Object files
 OBJ			= $(patsubst $(SRC_DIR)%.c,$(OBJ_DIR)%.o,$(SRC))

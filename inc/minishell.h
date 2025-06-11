@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 09:55:21 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/06/04 13:51:49 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/06/11 11:12:15 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@
 # include <stdio.h>
 # include <stdlib.h> // malloc
 # include <string.h> // para strdup
+# include <signal.h>
+
+extern int	g_exit_status;
 
 // Token codes
 typedef enum e_tok_type
@@ -116,8 +119,16 @@ t_command			*ft_parse_command(t_token *token_list, int *exit_status);
 
 // Executor
 
+// Signals
+void				ft_handle_sigint(int sig);
+void				ft_handle_sigquit(int sig);
+void				ft_setup_interactive_signals(void);
+
+
 // Exit and Free
 void				ft_free_token_list(t_token **tokens);
+void				ft_set_exit_status(int status);
+int					ft_get_exit_status(void);
 
 // Main
 void				ft_minishell_loop(char **envp, int *exit_status);

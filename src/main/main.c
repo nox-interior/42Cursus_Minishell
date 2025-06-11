@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 09:42:39 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/06/03 12:48:09 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/06/11 11:14:38 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,9 +108,9 @@ static void	ft_parse_and_execute(t_token *tokens, char **envp, int *exit_status)
 	t_command	*commands;
 
 	commands = ft_parse_command(tokens, exit_status);
-	exit_status = 0;
-	if (exit_status != 0) //QUITAR
+	if (ft_get_exit_status() != 0)
 		return ;
+	ft_set_exit_status(0);
 	(void)envp;
 	ft_free_token_list(&tokens);
 	if (!commands)
@@ -143,6 +143,7 @@ int	main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 	exit_status = 0;
+	ft_setup_interactive_signals();
 	ft_minishell_loop(envp, &exit_status);
-	return (0);
+	return (ft_get_exit_status());
 }
