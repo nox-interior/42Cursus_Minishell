@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 09:55:21 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/06/11 13:03:23 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/06/11 18:13:15 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@
 # include <stdlib.h> // malloc
 # include <string.h> // para strdup
 # include <signal.h>
+# include <sys/types.h>
+# include <sys/wait.h>
+# include <unistd.h>
 
 extern int	g_exit_status;
 
@@ -124,6 +127,9 @@ void				ft_free_command_list(t_command **cmd_list);
 t_command			*ft_parse_command(t_token *token_list, int *exit_status);
 
 // Executor
+bool				ft_is_builtin(t_command *cmd);
+int					ft_exec_builtin(t_command *cmd);
+void				ft_executor(t_command *cmd_list, char **envp);
 
 // Signals
 void				ft_handle_sigint(int sig);

@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 09:42:39 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/06/11 13:06:19 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/06/11 18:46:29 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,15 @@ static void	ft_parse_and_execute(t_token *tokens, char **envp, int *exit_status)
 	t_command	*commands;
 
 	ft_expand_variables(tokens, envp);
-	//ELIMINAR BLOQUE; SOLO PARA TESTEO
-	t_token	*debug = tokens;
-	printf("Tokens tras expansión:\n");
-	while (debug)
-	{
-		printf("  Token: [%d] -> \"%s\"\n", debug->type, debug->value);
-		debug = debug->next;
-	}
-	//HASTA AQUÍ
+	// //ELIMINAR BLOQUE; SOLO PARA TESTEO
+	// t_token	*debug = tokens;
+	// printf("Tokens tras expansión:\n");
+	// while (debug)
+	// {
+	// 	printf("  Token: [%d] -> \"%s\"\n", debug->type, debug->value);
+	// 	debug = debug->next;
+	// }
+	// // //HASTA AQUÍ
 	commands = ft_parse_command(tokens, exit_status);
 	if (ft_get_exit_status() != 0)
 		return ;
@@ -54,7 +54,7 @@ static void	ft_parse_and_execute(t_token *tokens, char **envp, int *exit_status)
 	ft_free_token_list(&tokens);
 	if (!commands)
 		return ;
-	// executor(commands, envp, exit_status);
+	ft_executor(commands, envp);
 	ft_free_command_list(&commands);
 }
 

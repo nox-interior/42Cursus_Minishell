@@ -6,7 +6,7 @@
 #    By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/08 14:13:37 by amarroyo          #+#    #+#              #
-#    Updated: 2025/06/04 12:02:55 by amarroyo         ###   ########.fr        #
+#    Updated: 2025/06/11 18:12:21 by amarroyo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,6 +52,7 @@ FTTO_DIR		=	$(SRC_DIR)ft_to/ft_atoi.c \
 
 FTSTR_DIR		=	$(SRC_DIR)ft_str/ft_split.c \
 					$(SRC_DIR)ft_str/ft_strchr.c \
+					$(SRC_DIR)ft_str/ft_strcmp.c \
 					$(SRC_DIR)ft_str/ft_strcpy.c \
 					$(SRC_DIR)ft_str/ft_strdup.c \
 					$(SRC_DIR)ft_str/ft_striteri.c \
