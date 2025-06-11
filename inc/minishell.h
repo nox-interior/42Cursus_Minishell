@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 09:55:21 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/06/11 12:27:32 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/06/11 13:03:23 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,13 +130,14 @@ void				ft_handle_sigint(int sig);
 void				ft_handle_sigquit(int sig);
 void				ft_setup_interactive_signals(void);
 
-
 // Exit and Free
 void				ft_free_token_list(t_token **tokens);
 void				ft_set_exit_status(int status);
 int					ft_get_exit_status(void);
 
 // Main
+char				*ft_get_user_input(void);
+int					ft_should_exit(char *line);
 void				ft_minishell_loop(char **envp, int *exit_status);
 
 #endif

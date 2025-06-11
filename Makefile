@@ -6,7 +6,7 @@
 #    By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/02 16:26:23 by amarroyo          #+#    #+#              #
-#    Updated: 2025/06/11 12:13:44 by amarroyo         ###   ########.fr        #
+#    Updated: 2025/06/11 13:04:12 by amarroyo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,8 @@ LIBFT_DIR	= libft/
 LIBFT		= $(LIBFT_DIR)/libft.a
 
 # Source files
-MAIN		= $(SRC_DIR)main/main.c
+MAIN		= $(SRC_DIR)main/01_main.c \
+			  $(SRC_DIR)main/02_aux_main.c
 
 TOKENIZER	= $(SRC_DIR)tokenizer/01_tokenizer.c \
 			  $(SRC_DIR)tokenizer/02_create_tokenizer.c \

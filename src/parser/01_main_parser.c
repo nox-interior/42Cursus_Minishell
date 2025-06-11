@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 12:26:15 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/06/03 11:12:50 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/06/11 13:07:37 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static int	ft_syntax_error(const char *token, int *exit_status)
 	*exit_status = 258;
 	return (0);
 }
+
 static int	ft_unexpected_error(int *exit_status)
 {
 	ft_printf("minishell: unexpected error creating token\n");
