@@ -6,7 +6,7 @@
 #    By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/02 16:26:23 by amarroyo          #+#    #+#              #
-#    Updated: 2025/06/11 18:07:46 by amarroyo         ###   ########.fr        #
+#    Updated: 2025/06/12 12:26:12 by amarroyo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,8 +54,12 @@ SIGNALS		= $(SRC_DIR)signals/01_signals.c
 EXECUTOR	= $(SRC_DIR)executor/01_executor.c \
 			  $(SRC_DIR)executor/02_builtin_executor.c
 
+BUILTINS	= $(SRC_DIR)builtins/01_echo.c \
+			  $(SRC_DIR)builtins/02_pwd.c \
+			  $(SRC_DIR)builtins/03_env.c \
+
 SRC			= $(MAIN) $(TOKENIZER) $(PARSER) $(EXIT) $(SIGNALS) \
-			  $(VAR_EXP) $(EXECUTOR)
+			  $(VAR_EXP)  $(BUILTINS) $(EXECUTOR)
 
 # Object files
 OBJ			= $(patsubst $(SRC_DIR)%.c,$(OBJ_DIR)%.o,$(SRC))

@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 09:55:21 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/06/11 18:13:15 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/06/12 12:25:51 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,15 +126,20 @@ void				ft_free_command_partial(t_command *cmd, t_list *args);
 void				ft_free_command_list(t_command **cmd_list);
 t_command			*ft_parse_command(t_token *token_list, int *exit_status);
 
-// Executor
-bool				ft_is_builtin(t_command *cmd);
-int					ft_exec_builtin(t_command *cmd);
-void				ft_executor(t_command *cmd_list, char **envp);
-
 // Signals
 void				ft_handle_sigint(int sig);
 void				ft_handle_sigquit(int sig);
 void				ft_setup_interactive_signals(void);
+
+// Builtins
+int					ft_exec_builtin_echo(t_command *cmd, char **envp);
+int					ft_exec_builtin_pwd(t_command *cmd, char **envp);
+int					ft_exec_builtin_env(t_command *cmd, char **envp);
+
+// Executor
+bool				ft_is_builtin(t_command *cmd);
+int					ft_exec_builtin(t_command *cmd, char **envp);
+void				ft_executor(t_command *cmd_list, char **envp);
 
 // Exit and Free
 void				ft_free_token_list(t_token **tokens);
