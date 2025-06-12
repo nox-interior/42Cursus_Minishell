@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 12:01:49 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/06/11 12:11:03 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/06/12 14:01:16 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,10 @@ static char	*ft_get_var_value(char *name, char **envp)
 	if (!name || !*name)
 		return (ft_strdup(""));
 	if (ft_strncmp(name, "?", 2) == 0)
-		return (ft_itoa(ft_get_exit_status()));
+	{
+		char *val = ft_itoa(ft_get_exit_status());
+		return (val);
+	}
 	len = ft_strlen(name);
 	i = 0;
 	while (envp[i])

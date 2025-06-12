@@ -1,31 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   02_pwd.c                                           :+:      :+:    :+:   */
+/*   01_copy_env.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/12 10:18:53 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/06/12 13:16:36 by amarroyo         ###   ########.fr       */
+/*   Created: 2025/06/12 12:43:09 by amarroyo          #+#    #+#             */
+/*   Updated: 2025/06/12 12:43:39 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_exec_builtin_pwd(t_command *cmd, char **envp)
+char	**ft_copy_env(char **envp)
 {
-	char *cwd;
+	int		count;
+	char	**copy;
+	int		i;
 
-	(void)cmd;
-	(void)envp;
-	cwd = getcwd(NULL, 0);
-	if (!cwd)
+	count = 0;
+	while (envp[count])
+		count++;
+	copy = malloc((count + 1) * sizeof(char *));
+	if (!copy)
+		return (NULL);
+	i = 0;
+	while (i < count)
 	{
-		perror("minishell: pwd");
-		ft_set_exit_status(1);
-		return (1);
+		copy[i] = ft_strdup(envp[i]);
+		if (!copy[i])
+		{
+			while (--i >= 0)
+				free(copy[i]);
+			free(copy);
+			return (NULL);
+		}
+		i++;
 	}
-	ft_putendl_fd(cwd, 1);
-	free(cwd);
-	return (0);
+	copy[i] = NULL;
+	return (copy);
 }

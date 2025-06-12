@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   02_pwd.c                                           :+:      :+:    :+:   */
+/*   02_free_env.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/12 10:18:53 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/06/12 13:16:36 by amarroyo         ###   ########.fr       */
+/*   Created: 2025/06/12 12:44:53 by amarroyo          #+#    #+#             */
+/*   Updated: 2025/06/12 12:45:21 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_exec_builtin_pwd(t_command *cmd, char **envp)
+void	ft_free_env(char **env)
 {
-	char *cwd;
+	int	i;
 
-	(void)cmd;
-	(void)envp;
-	cwd = getcwd(NULL, 0);
-	if (!cwd)
+	if (!env)
+		return ;
+	i = 0;
+	while (env[i])
 	{
-		perror("minishell: pwd");
-		ft_set_exit_status(1);
-		return (1);
+		free(env[i]);
+		i++;
 	}
-	ft_putendl_fd(cwd, 1);
-	free(cwd);
-	return (0);
+	free(env);
 }

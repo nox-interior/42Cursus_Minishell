@@ -6,7 +6,7 @@
 #    By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/02 16:26:23 by amarroyo          #+#    #+#              #
-#    Updated: 2025/06/12 12:26:12 by amarroyo         ###   ########.fr        #
+#    Updated: 2025/06/12 12:47:15 by amarroyo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,8 +58,11 @@ BUILTINS	= $(SRC_DIR)builtins/01_echo.c \
 			  $(SRC_DIR)builtins/02_pwd.c \
 			  $(SRC_DIR)builtins/03_env.c \
 
+ENV			= $(SRC_DIR)/env/01_copy_env.c \
+			  $(SRC_DIR)/env/02_free_env.c
+
 SRC			= $(MAIN) $(TOKENIZER) $(PARSER) $(EXIT) $(SIGNALS) \
-			  $(VAR_EXP)  $(BUILTINS) $(EXECUTOR)
+			  $(VAR_EXP) $(ENV) $(BUILTINS) $(EXECUTOR)
 
 # Object files
 OBJ			= $(patsubst $(SRC_DIR)%.c,$(OBJ_DIR)%.o,$(SRC))

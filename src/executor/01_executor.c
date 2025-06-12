@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 18:00:25 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/06/12 12:24:19 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/06/12 13:59:15 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	ft_executor(t_command *cmd_list, char **envp)
 	}
 	if (ft_is_builtin(cmd_list))
 	{
-		ft_set_exit_status(ft_exec_builtin(cmd_list, envp));
+		(ft_exec_builtin(cmd_list, envp));
 		return ;
 	}
 	ft_fork_and_exec(cmd_list, envp);

@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 09:54:33 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/06/12 10:30:08 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/06/12 13:59:46 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,6 @@ int	ft_exec_builtin_echo(t_command *cmd, char **envp)
 	}
 	if (newline)
 		write(1, "\n", 1);
+	ft_set_exit_status(0);
 	return (0);
 }

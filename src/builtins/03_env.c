@@ -7,7 +7,7 @@ int	ft_exec_builtin_env(t_command *cmd, char **envp)
 	if (cmd->argv[1])
 	{
 		ft_putstr_fd("env: too many arguments\n", 2);
-		ft_putendl_fd("DEBUG: retornando 1", 2); // TEMPORAL
+		ft_set_exit_status(1);
 		return (1);
 	}
 	i = 0;
@@ -17,5 +17,6 @@ int	ft_exec_builtin_env(t_command *cmd, char **envp)
 			ft_putendl_fd(envp[i], 1);
 		i++;
 	}
+	ft_set_exit_status(0);
 	return (0);
 }
