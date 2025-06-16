@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 09:42:39 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/06/16 19:06:41 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/06/16 19:20:27 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,24 +54,24 @@ void	ft_minishell_loop(t_shell *shell)
 	t_token	*tokens;
 
 	while (1)
-{
-	if (g_signal)
 	{
-		shell->exit_status = g_signal;
-		g_signal = 0;
+		if (g_signal)
+		{
+			shell->exit_status = g_signal;
+			g_signal = 0;
+		}
+		tokens = ft_read_and_tokenize(shell, &line);
+		if (ft_should_exit(line))
+			break ;
+		if (!tokens)
+			continue ;
+		ft_parse_and_execute(tokens, shell);
 	}
-	tokens = ft_read_and_tokenize(shell, &line);
-	if (ft_should_exit(line))
-		break ;
-	if (!tokens)
-		continue ;
-	ft_parse_and_execute(tokens, shell);
-}
 }
 
 int	main(int argc, char **argv, char **envp)
 {
-	t_shell shell;
+	t_shell	shell;
 
 	(void)argc;
 	(void)argv;

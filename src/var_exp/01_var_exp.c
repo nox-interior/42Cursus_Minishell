@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 12:01:49 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/06/16 18:53:03 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/06/16 19:21:45 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static char	*ft_get_var_value(char *name, t_shell *shell)
 	i = 0;
 	while (shell->envp[i])
 	{
-		if (ft_strncmp(shell->envp[i], name, len) == 0 
+		if (ft_strncmp(shell->envp[i], name, len) == 0
 			&& shell->envp[i][len] == '=')
 			return (ft_strdup(shell->envp[i] + len + 1));
 		i++;
