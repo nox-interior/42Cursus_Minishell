@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 09:55:21 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/06/12 12:45:35 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/06/16 16:37:29 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,13 @@ typedef struct s_command
 	int					heredoc;
 	struct s_command	*next;
 }						t_command;
+
+// Environment copy structure
+typedef struct s_shell
+{
+	char	**envp;
+	int		exit_status;
+}			t_shell;
 
 // Tokenizer
 t_token				*ft_tokenizer(const char *prompt);
