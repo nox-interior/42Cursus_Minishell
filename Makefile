@@ -6,7 +6,7 @@
 #    By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/02 16:26:23 by amarroyo          #+#    #+#              #
-#    Updated: 2025/06/12 12:47:15 by amarroyo         ###   ########.fr        #
+#    Updated: 2025/06/16 17:47:18 by amarroyo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,6 @@ PARSER		= $(SRC_DIR)parser/01_main_parser.c \
 #EXECUTOR	= $(SRC_DIR)executor/
 
 EXIT		= $(SRC_DIR)exit/01_free.c \
-			  $(SRC_DIR)exit/02_exit.c
 
 SIGNALS		= $(SRC_DIR)signals/01_signals.c
 

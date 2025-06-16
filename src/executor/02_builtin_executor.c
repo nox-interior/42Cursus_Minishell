@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 18:04:01 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/06/12 12:52:23 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/06/16 17:30:13 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,15 @@ bool	ft_is_builtin(t_command *cmd)
 		|| ft_strcmp(cmd_name, "exit") == 0);
 }
 
-int	ft_exec_builtin(t_command *cmd, char **envp)
+int	ft_exec_builtin(t_command *cmd, t_shell *shell)
 {
 	if (!cmd || !cmd->argv || !cmd->argv[0])
 		return (1);
 	if (ft_strcmp(cmd->argv[0], "echo") == 0)
-		return (ft_exec_builtin_echo(cmd, envp));
+		return (ft_exec_builtin_echo(cmd, shell));
 	if (ft_strcmp(cmd->argv[0], "pwd") == 0)
-		return (ft_exec_builtin_pwd(cmd, envp));
+		return (ft_exec_builtin_pwd(cmd, shell));
 	if (ft_strcmp(cmd->argv[0], "env") == 0)
-		return (ft_exec_builtin_env(cmd, envp));
+		return (ft_exec_builtin_env(cmd, shell));
 	return (0);
 }

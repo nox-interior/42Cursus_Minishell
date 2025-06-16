@@ -6,13 +6,13 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 09:42:39 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/06/16 16:46:45 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/06/16 19:06:41 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-static t_token	*ft_read_and_tokenize(char **line)
+static t_token	*ft_read_and_tokenize(t_shell *shell, char **line)
 {
 	t_token	*tokens;
 
@@ -24,7 +24,7 @@ static t_token	*ft_read_and_tokenize(char **line)
 	tokens = ft_tokenizer(*line);
 	if (!tokens)
 	{
-		ft_set_exit_status(2);
+		shell->exit_status = 2;
 		free(*line);
 		return (NULL);
 	}
@@ -32,58 +32,47 @@ static t_token	*ft_read_and_tokenize(char **line)
 	return (tokens);
 }
 
-static void	ft_parse_and_execute(t_token *tokens, char **envp, int *exit_status)
+static void	ft_parse_and_execute(t_token *tokens, t_shell *shell)
 {
 	t_command	*commands;
 
-	ft_expand_variables(tokens, envp);
-	commands = ft_parse_command(tokens, exit_status);
+	ft_expand_variables(tokens, shell);
+	commands = ft_parse_command(tokens, shell);
 	if (!commands)
 	{
 		ft_free_token_list(&tokens);
 		return ;
 	}
-	ft_executor(commands, envp);
+	ft_executor(commands, shell);
 	ft_free_token_list(&tokens);
 	ft_free_command_list(&commands);
 }
 
-void	ft_minishell_loop(char **envp, int *exit_status)
+void	ft_minishell_loop(t_shell *shell)
 {
-	char		*line;
-	t_token		*tokens;
+	char	*line;
+	t_token	*tokens;
 
 	while (1)
+{
+	if (g_signal)
 	{
-		tokens = ft_read_and_tokenize(&line);
-		if (ft_should_exit(line))
-			break ;
-		if (!tokens)
-			continue ;
-		ft_parse_and_execute(tokens, envp, exit_status);
+		shell->exit_status = g_signal;
+		g_signal = 0;
 	}
+	tokens = ft_read_and_tokenize(shell, &line);
+	if (ft_should_exit(line))
+		break ;
+	if (!tokens)
+		continue ;
+	ft_parse_and_execute(tokens, shell);
 }
-
-// int	main(int argc, char **argv, char **envp)
-// {
-// 	int	exit_status;
-// 	char **my_env;
-
-// 	(void)argc;
-// 	(void)argv;
-// 	my_env = ft_copy_env(envp);
-// 	if (!my_env)
-// 		return (perror("minishell: malloc"), 1);
-// 	exit_status = 0;
-// 	ft_setup_interactive_signals();
-// 	ft_minishell_loop(my_env, &exit_status);
-// 	return (ft_get_exit_status());
-// }
+}
 
 int	main(int argc, char **argv, char **envp)
 {
-	t_shell	shell;
-	
+	t_shell shell;
+
 	(void)argc;
 	(void)argv;
 	shell.envp = ft_copy_env(envp);
@@ -92,5 +81,5 @@ int	main(int argc, char **argv, char **envp)
 	shell.exit_status = 0;
 	ft_setup_interactive_signals();
 	ft_minishell_loop(&shell);
-	return (ft_get_exit_status());
+	return (shell.exit_status);
 }
