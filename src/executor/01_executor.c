@@ -20,11 +20,40 @@ static void	ft_handle_child_status(int status)
 		ft_set_exit_status(128 + WTERMSIG(status));
 }
 
+static char	*ft_find_in_path(const char *cmd)
+{
+	char	*path;
+	char	**dir;
+	char	*full_path;
+	int		i;
+
+	cmd = ft_strjoin("/", cmd);
+	path = getenv("PATH");
+	if (!path)
+		return (NULL);
+	dir = ft_split(path, ':');
+	i = 0;
+	while (dir[i] != NULL)
+	{
+		full_path = ft_strjoin(dir[i], cmd);
+		if (access(full_path, X_OK) == 0)
+			return (full_path); // liberar dir??
+		i++;
+	}
+	//liberar dir o algo mas??
+	return (NULL); //cmd: cmd not found ??
+}
+
 static void	ft_fork_and_exec(t_command *cmd, char **envp)
 {
 	pid_t	pid;
 	int		status;
+	char	*cmd_path;
 
+	if (cmd->argv[0][0] == '/')
+		cmd_path = cmd->argv[0];
+	else
+		cmd_path = ft_find_in_path(cmd->argv[0]);
 	pid = fork();
 	if (pid < 0)
 	{
@@ -34,7 +63,7 @@ static void	ft_fork_and_exec(t_command *cmd, char **envp)
 	}
 	if (pid == 0)
 	{
-		execve(cmd->argv[0], cmd->argv, envp);
+		execve(cmd_path, cmd->argv, envp);
 		perror("minishell");
 		exit(127);
 	}
