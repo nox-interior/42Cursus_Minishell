@@ -36,7 +36,7 @@ static char	*ft_find_in_path(const char *cmd)
 	while (dir[i] != NULL)
 	{
 		full_path = ft_strjoin(dir[i], cmd);
-		if (access(full_path, X_OK) == 0)
+		if (access(full_path, X_OK) == 0) // otro access con F_OK?
 			return (full_path); // liberar dir??
 		i++;
 	}
