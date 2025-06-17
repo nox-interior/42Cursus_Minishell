@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 09:55:21 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/06/16 19:04:38 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/06/17 12:11:29 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <unistd.h>
+# include <linux/limits.h>
+# include <errno.h>
 
 extern volatile sig_atomic_t	g_signal;
 
@@ -145,11 +147,20 @@ void					ft_setup_interactive_signals(void);
 // Env
 char					**ft_copy_env(char **envp);
 void					ft_free_env(char **env);
+char					*ft_get_env_value(char **envp, const char *name);
+int						ft_find_env_index(char **envp, const char *name);
+int						ft_replace_env_var(char **envp, int idx,
+							const char *name, const char *val);
+int						ft_append_env_var(char ***envp, const char *name,
+							const char *value);
+int						ft_update_env_var(char ***envp, const char *name,
+							const char *value);
 
 // Builtins
 int						ft_exec_builtin_echo(t_command *cmd, t_shell *shell);
 int						ft_exec_builtin_pwd(t_command *cmd, t_shell *shell);
 int						ft_exec_builtin_env(t_command *cmd, t_shell *shell);
+int						ft_exec_builtin_cd(t_command *cmd, t_shell *shell);
 
 // Executor
 bool					ft_is_builtin(t_command *cmd);
