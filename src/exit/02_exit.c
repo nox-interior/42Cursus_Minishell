@@ -23,3 +23,5 @@ int	ft_get_exit_status(void)
 {
 	return (g_exit_status);
 }
+
+//funcion de liberacion de todo, set el exit status, print error (if elses), exit.

@@ -30,18 +30,23 @@ static char	*ft_find_in_path(const char *cmd)
 	cmd = ft_strjoin("/", cmd);
 	path = getenv("PATH");
 	if (!path)
-		return (NULL);
+		return (NULL); //minishell: <cmd>: No such file or directory //(127)
 	dir = ft_split(path, ':');
 	i = 0;
 	while (dir[i] != NULL)
 	{
 		full_path = ft_strjoin(dir[i], cmd);
-		if (access(full_path, X_OK) == 0) // otro access con F_OK?
-			return (full_path); // liberar dir??
+		if (access(full_path, F_OK) == 0)
+		{
+			if (access(full_path, X_OK) == 0)
+				return (full_path); // liberar dir??
+			else
+				return (); //minishell: <full_path>: Permission denied //(126)
+		}
 		i++;
 	}
 	//liberar dir o algo mas??
-	return (NULL); //cmd: cmd not found ??
+	return (NULL); //<cmd>: cmd not found //(127)
 }
 
 static void	ft_fork_and_exec(t_command *cmd, char **envp)
@@ -65,7 +70,7 @@ static void	ft_fork_and_exec(t_command *cmd, char **envp)
 	{
 		execve(cmd_path, cmd->argv, envp);
 		perror("minishell");
-		exit(127);
+		exit(127); //liberacion??
 	}
 	waitpid(pid, &status, 0);
 	ft_handle_child_status(status);
