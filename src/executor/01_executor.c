@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
+#define STR_FILE "No such file or directory"
 
 static void	ft_handle_child_status(int status, t_shell *shell)
 {
@@ -20,11 +21,86 @@ static void	ft_handle_child_status(int status, t_shell *shell)
 		shell->exit_status = 128 + WTERMSIG(status);
 }
 
+static  void	ft_free_split(char **s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i])
+	{
+		free(s[i]);
+		i++;
+	}
+	free(s);
+	s = NULL;
+}
+static void	ft_puterror(char *err, char *cmd)
+{
+	ft_putstr_fd("minishell: ", 2);
+	if (cmd)
+	{
+		ft_putstr_fd(cmd, 2);
+		ft_putstr_fd(": ", 2);
+	}
+	ft_putstr_fd(err, 2);
+	ft_putstr_fd("\n", 2);
+}
+
+static char	*ft_find_in_path(const char *cmd, t_shell *shell)
+{
+	char	*path;
+	char	**dir;
+	char	*full_path;
+	int		i;
+
+	path = getenv("PATH");
+	if (!path)
+	{
+		ft_puterror("No such file or directory", (char *)cmd);
+		shell->exit_status = 127;
+		return (NULL);
+	}
+	dir = ft_split(path, ':');
+	i = 0;
+	while (dir[i])
+	{
+		full_path = ft_strjoin(dir[i], "/");
+		full_path = ft_strjoin(full_path, cmd);
+		if (access(full_path, F_OK) == 0)
+		{
+			if (access(full_path, X_OK) == 0)
+			{
+				ft_free_split(dir);
+				return (full_path);
+			}
+			else
+			{
+				ft_free_split(dir);
+				shell->exit_status = 126;
+				ft_puterror("Permission denied", NULL);
+				return (NULL);
+			}
+		}
+		i++;
+	}
+	ft_free_split(dir);
+	ft_puterror("cmd not found", (char *)cmd);
+	shell->exit_status = 127;
+	return (NULL);
+}
+
 static void	ft_fork_and_exec(t_command *cmd, t_shell *shell)
 {
 	pid_t	pid;
 	int		status;
+	char	*cmd_path;
 
+	if (cmd->argv[0][0] == '/')
+		cmd_path = cmd->argv[0];
+	else
+		cmd_path = ft_find_in_path(cmd->argv[0], shell);
+	if (!cmd_path)
+		return ;
 	pid = fork();
 	if (pid < 0)
 	{
@@ -34,7 +110,7 @@ static void	ft_fork_and_exec(t_command *cmd, t_shell *shell)
 	}
 	if (pid == 0)
 	{
-		execve(cmd->argv[0], cmd->argv, shell->envp);
+		execve(cmd_path, cmd->argv, shell->envp);
 		perror("minishell");
 		exit(127);
 	}
