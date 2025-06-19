@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 18:00:25 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/06/19 10:55:46 by calbar-c         ###   ########.fr       */
+/*   Updated: 2025/06/19 12:02:39 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	ft_handle_child_status(int status, t_shell *shell)
 		shell->exit_status = 128 + WTERMSIG(status);
 }
 
-static  void	ft_free_split(char **s)
+static void	ft_free_split(char **s)
 {
 	int	i;
 
@@ -33,6 +33,7 @@ static  void	ft_free_split(char **s)
 	free(s);
 	s = NULL;
 }
+
 static void	ft_puterror(char *err, char *cmd)
 {
 	ft_putstr_fd("minishell: ", 2);
