@@ -94,7 +94,7 @@ static void	ft_fork_and_exec(t_command *cmd, t_shell *shell)
 	int		status;
 	char	*cmd_path;
 
-	if (cmd->argv[0][0] == '/')
+	if (cmd->argv[0][0] == '/' || cmd->argv[0][0] == '.')
 		cmd_path = cmd->argv[0];
 	else
 		cmd_path = ft_find_in_path(cmd->argv[0], shell);
@@ -111,7 +111,7 @@ static void	ft_fork_and_exec(t_command *cmd, t_shell *shell)
 	{
 		execve(cmd_path, cmd->argv, shell->envp);
 		perror("minishell");
-		exit(127); //liberacion??
+		exit(127);
 	}
 	waitpid(pid, &status, 0);
 	ft_handle_child_status(status, shell);
