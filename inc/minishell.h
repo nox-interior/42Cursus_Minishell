@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 09:55:21 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/06/17 12:11:29 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/06/19 10:39:23 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,6 +161,7 @@ int						ft_exec_builtin_echo(t_command *cmd, t_shell *shell);
 int						ft_exec_builtin_pwd(t_command *cmd, t_shell *shell);
 int						ft_exec_builtin_env(t_command *cmd, t_shell *shell);
 int						ft_exec_builtin_cd(t_command *cmd, t_shell *shell);
+int						ft_exec_builtin_export(t_command *cmd, t_shell *shell);
 
 // Executor
 bool					ft_is_builtin(t_command *cmd);

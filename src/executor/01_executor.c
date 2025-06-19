@@ -6,12 +6,11 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 18:00:25 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/06/16 18:56:49 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/06/19 11:54:40 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#define STR_FILE "No such file or directory"
 
 static void	ft_handle_child_status(int status, t_shell *shell)
 {
@@ -21,7 +20,7 @@ static void	ft_handle_child_status(int status, t_shell *shell)
 		shell->exit_status = 128 + WTERMSIG(status);
 }
 
-static  void	ft_free_split(char **s)
+static void	ft_free_split(char **s)
 {
 	int	i;
 
@@ -34,6 +33,7 @@ static  void	ft_free_split(char **s)
 	free(s);
 	s = NULL;
 }
+
 static void	ft_puterror(char *err, char *cmd)
 {
 	ft_putstr_fd("minishell: ", 2);
