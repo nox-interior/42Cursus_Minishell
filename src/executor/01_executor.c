@@ -6,12 +6,11 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 18:00:25 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/06/16 18:56:49 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/06/19 10:55:46 by calbar-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#define STR_FILE "No such file or directory"
 
 static void	ft_handle_child_status(int status, t_shell *shell)
 {
