@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 18:00:25 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/06/19 11:54:40 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/06/19 12:02:39 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ static void	ft_fork_and_exec(t_command *cmd, t_shell *shell)
 	int		status;
 	char	*cmd_path;
 
-	if (cmd->argv[0][0] == '/')
+	if (cmd->argv[0][0] == '/' || cmd->argv[0][0] == '.')
 		cmd_path = cmd->argv[0];
 	else
 		cmd_path = ft_find_in_path(cmd->argv[0], shell);
