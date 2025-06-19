@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarroyo <amarroyo@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 13:58:08 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/01/10 13:20:12 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/06/16 19:27:04 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,16 @@
 #  define BUFFER_SIZE 5
 # endif
 
-#ifndef OPEN_MAX
-#define OPEN_MAX 1024
-#endif
+# ifndef OPEN_MAX
+#  define OPEN_MAX 1024
+# endif
 
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdio.h>
 # include <fcntl.h>
 # include <limits.h>
-#include "libft.h"
+# include "libft.h"
 
 char	*ft_read_file(int fd, char *store_buffer);
 char	*ft_extract_line(char *store_buffer);

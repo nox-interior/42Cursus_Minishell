@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi_05.c                                       :+:      :+:    :+:   */
+/*   ft_atoi_overflow.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarroyo <amarroyo@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 11:05:47 by amarroyo          #+#    #+#             */
-/*   Updated: 2024/10/28 11:20:15 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/06/16 19:24:20 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	check_overflow(long nbr, int sign)
 {
 	if (sign == 1 && nbr > INT_MAX)
 		return (-1);
-	if (sign == -1 && -nbr < INT_MIN)
+	if (sign == -1 && (-nbr) < INT_MIN)
 		return (0);
 	return (1);
 }

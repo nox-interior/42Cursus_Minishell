@@ -22,7 +22,7 @@ int	ft_atoi(const char *str)
 	int	i;
 	int	nbr;
 	int	sign;
-	
+
 	i = 0;
 	nbr = 0;
 	sign = 1;
@@ -41,7 +41,7 @@ int	ft_atoi(const char *str)
 			nbr = (nbr * 10) + (str[i] - '0');
 			i++;
 		}
-		break;
+		break ;
 	}
 	return (sign * nbr);
 }
