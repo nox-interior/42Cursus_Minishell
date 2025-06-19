@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 18:00:25 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/06/19 10:55:46 by calbar-c         ###   ########.fr       */
+/*   Updated: 2025/06/19 13:02:18 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	ft_handle_child_status(int status, t_shell *shell)
 		shell->exit_status = 128 + WTERMSIG(status);
 }
 
-static  void	ft_free_split(char **s)
+static void	ft_free_split(char **s)
 {
 	int	i;
 
@@ -33,6 +33,7 @@ static  void	ft_free_split(char **s)
 	free(s);
 	s = NULL;
 }
+
 static void	ft_puterror(char *err, char *cmd)
 {
 	ft_putstr_fd("minishell: ", 2);
@@ -94,7 +95,7 @@ static void	ft_fork_and_exec(t_command *cmd, t_shell *shell)
 	int		status;
 	char	*cmd_path;
 
-	if (cmd->argv[0][0] == '/')
+	if (cmd->argv[0][0] == '/' || cmd->argv[0][0] == '.')
 		cmd_path = cmd->argv[0];
 	else
 		cmd_path = ft_find_in_path(cmd->argv[0], shell);
