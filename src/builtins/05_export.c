@@ -6,40 +6,11 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 10:51:12 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/06/19 11:53:30 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/06/23 13:56:00 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static void	ft_print_export_line(char *env_var)
-{
-	char	*equal;
-	char	*name;
-	char	*value;
-
-	equal = ft_strchr(env_var, '=');
-	if (!equal)
-		return ;
-	name = ft_substr(env_var, 0, equal - env_var);
-	value = equal + 1;
-	if (!name)
-		return ;
-	printf("declare -x %s=\"%s\"\n", name, value);
-	free(name);
-}
-
-static void	ft_export_print_all(char **envp)
-{
-	int	i;
-
-	i = 0;
-	while (envp[i])
-	{
-		ft_print_export_line(envp[i]);
-		i++;
-	}
-}
 
 static void	ft_export_put_error(t_shell *shell)
 {
@@ -79,13 +50,19 @@ int	ft_exec_builtin_export(t_command *cmd, t_shell *shell)
 
 	if (!cmd->argv[1])
 	{
-		ft_export_print_all(shell->envp);
+		ft_export_print_sorted(shell->envp);
 		shell->exit_status = 0;
 		return (0);
 	}
 	i = 1;
 	while (cmd->argv[i])
 	{
+		if (!ft_is_valid_identifier(cmd->argv[i]))
+		{
+			ft_export_invalid_identifier(cmd->argv[i], shell);
+			i++;
+			continue ;
+		}
 		ft_export_set_var(cmd->argv[i], shell);
 		i++;
 	}
