@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 18:00:25 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/06/19 12:02:39 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/06/24 10:16:21 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,6 @@ static void	ft_handle_child_status(int status, t_shell *shell)
 		shell->exit_status = WEXITSTATUS(status);
 	else if (WIFSIGNALED(status))
 		shell->exit_status = 128 + WTERMSIG(status);
-}
-
-static void	ft_free_split(char **s)
-{
-	int	i;
-
-	i = 0;
-	while (s[i])
-	{
-		free(s[i]);
-		i++;
-	}
-	free(s);
-	s = NULL;
 }
 
 static void	ft_puterror(char *err, char *cmd)

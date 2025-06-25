@@ -6,7 +6,7 @@
 #    By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/02 16:26:23 by amarroyo          #+#    #+#              #
-#    Updated: 2025/06/17 12:12:09 by amarroyo         ###   ########.fr        #
+#    Updated: 2025/06/23 13:56:46 by amarroyo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,8 +44,6 @@ PARSER		= $(SRC_DIR)parser/01_main_parser.c \
 			  $(SRC_DIR)parser/03_command_parser.c \
 			  $(SRC_DIR)parser/04_free_parser.c
 
-#EXECUTOR	= $(SRC_DIR)executor/
-
 EXIT		= $(SRC_DIR)exit/01_free.c \
 
 SIGNALS		= $(SRC_DIR)signals/01_signals.c
@@ -57,10 +55,14 @@ BUILTINS	= $(SRC_DIR)builtins/01_echo.c \
 			  $(SRC_DIR)builtins/02_pwd.c \
 			  $(SRC_DIR)builtins/03_env.c \
 			  $(SRC_DIR)builtins/04_cd.c \
+			  $(SRC_DIR)builtins/05_export.c \
+			  $(SRC_DIR)builtins/06_identifiers_export.c \
+			  $(SRC_DIR)builtins/07_sort_export.c
 
 ENV			= $(SRC_DIR)/env/01_copy_env.c \
 			  $(SRC_DIR)/env/02_free_env.c \
-			  $(SRC_DIR)/env/03_manage_env.c
+			  $(SRC_DIR)/env/03_manage_env.c \
+			  $(SRC_DIR)/env/04_manage02_env.c
 
 SRC			= $(MAIN) $(TOKENIZER) $(PARSER) $(EXIT) $(SIGNALS) \
 			  $(VAR_EXP) $(ENV) $(BUILTINS) $(EXECUTOR)
