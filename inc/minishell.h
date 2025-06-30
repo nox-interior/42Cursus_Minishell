@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 09:55:21 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/06/23 15:24:21 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/06/30 13:09:28 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,6 +178,10 @@ int								ft_is_valid_identifier(const char *s);
 void							ft_export_invalid_identifier(const char *arg,
 									t_shell *shell);
 void							ft_export_print_sorted(char **envp);
+void							ft_remove_env_var(t_shell *shell,
+									const char *name);
+int								ft_exec_builtin_unset(t_command *cmd,
+									t_shell *shell);
 
 // Executor
 bool							ft_is_builtin(t_command *cmd);

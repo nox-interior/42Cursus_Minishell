@@ -6,7 +6,7 @@
 #    By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/02 16:26:23 by amarroyo          #+#    #+#              #
-#    Updated: 2025/06/23 13:56:46 by amarroyo         ###   ########.fr        #
+#    Updated: 2025/06/30 13:08:06 by amarroyo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,7 +57,9 @@ BUILTINS	= $(SRC_DIR)builtins/01_echo.c \
 			  $(SRC_DIR)builtins/04_cd.c \
 			  $(SRC_DIR)builtins/05_export.c \
 			  $(SRC_DIR)builtins/06_identifiers_export.c \
-			  $(SRC_DIR)builtins/07_sort_export.c
+			  $(SRC_DIR)builtins/07_sort_export.c \
+			  $(SRC_DIR)builtins/08_unset.c \
+			  $(SRC_DIR)builtins/09_aux_unset.c
 
 ENV			= $(SRC_DIR)/env/01_copy_env.c \
 			  $(SRC_DIR)/env/02_free_env.c \
