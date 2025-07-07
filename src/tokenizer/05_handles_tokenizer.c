@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 12:22:09 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/07/07 17:27:05 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/07/07 17:40:23 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,7 @@ int	handle_special(t_token **token_list, const char *prompt, int i)
 			ft_add_token(token_list, ft_new_token(T_WORD, joined));
 		}
 		else
-		{
 			ft_add_token(token_list, ft_new_token(T_D_QUOTE, quoted));
-			free(quoted);
-		}
 	}
 	else if (prompt[i] == '$')
 		i = ft_var_token(token_list, prompt, i);
