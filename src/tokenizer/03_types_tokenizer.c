@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 13:30:45 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/06/04 13:44:54 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/07/07 17:17:14 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,30 +24,53 @@ bool	ft_is_word_char(char c)
 	return (true);
 }
 
-int	ft_quotes_token(t_token **tokens, const char *prompt, int i)
+// int	ft_quotes_token(t_token **tokens, const char *prompt, int i)
+// {
+// 	int		start;
+// 	char	quote;
+// 	char	*value;
+
+// 	quote = prompt[i];
+// 	i++;
+// 	start = i;
+// 	while (prompt[i] && prompt[i] != quote)
+// 		i++;
+// 	if (prompt[i] == '\0')
+// 	{
+// 		ft_putstr_fd("minishell: error: non-closed quotes\n", 2);
+// 		return (-1);
+// 	}
+// 	value = ft_substr(prompt, start, i - start);
+// 	if (!value)
+// 		return (-1);
+// 	if (quote == '\'')
+// 		ft_add_token(tokens, ft_new_token(T_S_QUOTE, value));
+// 	else if (quote == '\"')
+// 		ft_add_token(tokens, ft_new_token(T_D_QUOTE, value));
+// 	return (i + 1);
+// }
+
+char	*ft_quotes_token(const char *prompt, int *i)
 {
 	int		start;
 	char	quote;
 	char	*value;
 
-	quote = prompt[i];
-	i++;
-	start = i;
-	while (prompt[i] && prompt[i] != quote)
-		i++;
-	if (prompt[i] == '\0')
+	quote = prompt[*i];
+	(*i)++;
+	start = *i;
+	while (prompt[*i] && prompt[*i] != quote)
+		(*i)++;
+	if (prompt[*i] == '\0')
 	{
 		ft_putstr_fd("minishell: error: non-closed quotes\n", 2);
-		return (-1);
+		return (NULL);
 	}
-	value = ft_substr(prompt, start, i - start);
+	value = ft_substr(prompt, start, *i - start);
 	if (!value)
-		return (-1);
-	if (quote == '\'')
-		ft_add_token(tokens, ft_new_token(T_S_QUOTE, value));
-	else if (quote == '\"')
-		ft_add_token(tokens, ft_new_token(T_D_QUOTE, value));
-	return (i + 1);
+		return (NULL);
+	(*i)++; // saltar la comilla de cierre
+	return (value);
 }
 
 int	ft_word_token(t_token **tokens, const char *prompt, int i)

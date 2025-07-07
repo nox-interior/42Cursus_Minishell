@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 09:55:21 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/06/30 13:20:58 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/07/07 17:21:37 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,9 @@ int								ft_create_var_token(t_token **t_list,
 int								ft_create_token(t_token **token_list,
 									const char *prompt, int i);
 bool							ft_is_word_char(char c);
-int								ft_quotes_token(t_token **tokens,
-									const char *prompt, int i);
+//int								ft_quotes_token(t_token **tokens,
+//									const char *prompt, int i);
+char							*ft_quotes_token(const char *prompt, int *i);
 int								ft_word_token(t_token **tokens,
 									const char *prompt, int i);
 int								handle_redirection(t_token **token_list,

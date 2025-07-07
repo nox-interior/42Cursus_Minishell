@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 12:22:09 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/06/04 13:29:54 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/07/07 17:19:26 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,37 @@ int	handle_special(t_token **token_list, const char *prompt, int i)
 		i = handle_pipe(token_list, prompt, i);
 	else if (prompt[i] == '&' || prompt[i] == ';' || prompt[i] == '!')
 		i = handle_special_inv(token_list, prompt, i);
+	// else if (prompt[i] == '\'' || prompt[i] == '\"')
+	// 	i = ft_quotes_token(token_list, prompt, i);
 	else if (prompt[i] == '\'' || prompt[i] == '\"')
-		i = ft_quotes_token(token_list, prompt, i);
+	{
+		char	*quoted;
+		char	*joined;
+		char	*rest;
+		int		start;
+
+		quoted = ft_quotes_token(prompt, &i);
+		if (!quoted)
+		return (-1);
+		start = i;
+		while (prompt[i] && !ft_isspace(prompt[i])
+		&& prompt[i] != '|' && prompt[i] != '<' && prompt[i] != '>'
+		&& prompt[i] != '\'' && prompt[i] != '\"')
+		i++;
+		if (i > start)
+		{
+		rest = ft_substr(prompt, start, i - start);
+		joined = ft_strjoin(quoted, rest);
+		free(quoted);
+		free(rest);
+		ft_add_token(token_list, ft_new_token(T_WORD, joined));
+		}
+		else
+		{
+		ft_add_token(token_list, ft_new_token(T_D_QUOTE, quoted));
+		free(quoted);
+		}
+	}
 	else if (prompt[i] == '$')
 		i = ft_var_token(token_list, prompt, i);
 	return (i);
