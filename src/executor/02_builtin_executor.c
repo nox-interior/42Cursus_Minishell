@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 18:04:01 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/06/19 10:43:18 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/06/30 13:19:38 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,9 @@ int	ft_exec_builtin(t_command *cmd, t_shell *shell)
 		return (ft_exec_builtin_env(cmd, shell));
 	if (ft_strcmp(cmd->argv[0], "export") == 0)
 		return (ft_exec_builtin_export(cmd, shell));
+	if (ft_strcmp(cmd->argv[0], "unset") == 0)
+		return (ft_exec_builtin_unset(cmd, shell));
+	if (ft_strcmp(cmd->argv[0], "exit") == 0)
+		return (ft_exec_builtin_exit(cmd, shell));
 	return (0);
 }
