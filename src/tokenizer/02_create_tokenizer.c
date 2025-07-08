@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 13:45:46 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/06/11 12:47:15 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/07/08 10:47:49 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,10 @@ int	ft_create_token(t_token **token_list, const char *prompt, int i)
 	if (prompt[i] == '<' || prompt[i] == '>' || prompt[i] == '|'
 		|| prompt[i] == '&' || prompt[i] == ';' || prompt[i] == '!'
 		|| prompt[i] == '\'' || prompt[i] == '\"' || prompt[i] == '$')
-		i = handle_special(token_list, prompt, i);
+		i = ft_handle_special(token_list, prompt, i);
 	else if (ft_is_word_char(prompt[i]))
 		i = ft_word_token(token_list, prompt, i);
 	else
-		i = handle_invalid(token_list, prompt, i);
+		i = ft_handle_invalid(token_list, prompt, i);
 	return (i);
 }

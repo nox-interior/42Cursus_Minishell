@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 09:55:21 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/06/30 13:20:58 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/07/08 11:47:30 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <signal.h>
-# include <stdbool.h> // para bool
+# include <stdbool.h>
 # include <stdio.h>
-# include <stdlib.h> // malloc
-# include <string.h> // para strdup
+# include <stdlib.h>
+# include <string.h>
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <unistd.h>
@@ -34,7 +34,7 @@ extern volatile sig_atomic_t	g_signal;
 // Token codes
 typedef enum e_tok_type
 {
-	T_NONE, // para evitar tener tokens sin tipo, control de errores
+	T_NONE,
 	T_SPACES,
 	T_WORD,
 	T_S_QUOTE,
@@ -92,19 +92,20 @@ int								ft_create_var_token(t_token **t_list,
 int								ft_create_token(t_token **token_list,
 									const char *prompt, int i);
 bool							ft_is_word_char(char c);
-int								ft_quotes_token(t_token **tokens,
-									const char *prompt, int i);
+char							*ft_quotes_token(const char *prompt, int *i);
 int								ft_word_token(t_token **tokens,
 									const char *prompt, int i);
-int								handle_redirection(t_token **token_list,
+int								ft_handle_redirection(t_token **token_list,
 									const char *prompt, int i);
-int								handle_pipe(t_token **token_list,
+int								ft_handle_pipe(t_token **token_list,
 									const char *prompt, int i);
-int								handle_special(t_token **token_list,
+int								ft_handle_special(t_token **token_list,
 									const char *prompt, int i);
-int								handle_invalid(t_token **token_list,
+int								ft_handle_quote_token(t_token **tokens,
 									const char *prompt, int i);
-int								handle_special_inv(t_token **token_list,
+int								ft_handle_invalid(t_token **token_list,
+									const char *prompt, int i);
+int								ft_handle_special_inv(t_token **token_list,
 									const char *prompt, int i);
 void							ft_pipe_token(t_token **token_list);
 void							ft_dub_redir(t_token **token_list,
