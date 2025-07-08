@@ -195,6 +195,9 @@ void							ft_executor(t_command *cmd_list,
 // Exit and Free
 void							ft_free_token_list(t_token **tokens);
 void							ft_free_split(char **s);
+void							ft_puterror(char *err, char *cmd);
+void							print_exec_error(char *cmd);
+void							print_fd_error(char *call);
 
 // Main
 char							*ft_get_user_input(void);
