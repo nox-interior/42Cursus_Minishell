@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 09:55:21 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/07/08 10:56:01 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/07/08 11:47:30 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <signal.h>
-# include <stdbool.h> // para bool
+# include <stdbool.h>
 # include <stdio.h>
-# include <stdlib.h> // malloc
-# include <string.h> // para strdup
+# include <stdlib.h>
+# include <string.h>
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <unistd.h>
@@ -34,7 +34,7 @@ extern volatile sig_atomic_t	g_signal;
 // Token codes
 typedef enum e_tok_type
 {
-	T_NONE, // para evitar tener tokens sin tipo, control de errores
+	T_NONE,
 	T_SPACES,
 	T_WORD,
 	T_S_QUOTE,
