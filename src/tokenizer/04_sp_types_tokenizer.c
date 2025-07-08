@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 13:17:36 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/06/11 12:45:08 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/07/08 10:48:33 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,35 +78,6 @@ char	*ft_var_with_dollar(const char *prompt, int start, int end)
 	free(var_name);
 	return (result);
 }
-
-// int	ft_var_token(t_token **token_list, const char *prompt, int i)
-// {
-// 	int		start;
-// 	char	*value;
-// 	t_token	*new_token;
-
-// 	new_token = NULL;
-// 	start = i + 1;                                  // start se salta el $
-// 	i++;                                            // saltamos el $
-// 	if (prompt[i] == '\0' || ft_isspace(prompt[i])) // el token = "$" (WORD)
-// 		return (ft_word_token(token_list, prompt, i - 1));
-// 	if (prompt[i] == '?')
-// 		return (ft_is_exit_tok(token_list, new_token, i));
-// 			// si todo va bien devuelve i + 1
-// 	while (prompt[i] && (ft_isalpha(prompt[i]) || ft_isdigit(prompt[i])
-// 			|| prompt[i] == '_'))
-// 		i++;
-// 	if (prompt[i] == '$')
-// 		i++;
-// 	if (i - start <= 0)
-// 		return (-1);
-// 	value = ft_substr(prompt, start, i - start);
-// 	if (!value)
-// 		return (-1);
-// 	if (!ft_create_var_token(token_list, new_token, value))
-// 		return (-1);
-// 	return (i);
-// }
 
 int	ft_var_token(t_token **token_list, const char *prompt, int i)
 {

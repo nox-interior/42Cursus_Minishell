@@ -6,13 +6,13 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 12:22:09 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/07/07 17:59:37 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/07/08 11:02:47 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	handle_redirection(t_token **token_list, const char *prompt, int i)
+int	ft_handle_redirection(t_token **token_list, const char *prompt, int i)
 {
 	if (prompt[i] == prompt[i + 1])
 	{
@@ -25,7 +25,7 @@ int	handle_redirection(t_token **token_list, const char *prompt, int i)
 	return (i);
 }
 
-int	handle_pipe(t_token **token_list, const char *prompt, int i)
+int	ft_handle_pipe(t_token **token_list, const char *prompt, int i)
 {
 	if (prompt[i + 1] == '|')
 	{
@@ -40,96 +40,22 @@ int	handle_pipe(t_token **token_list, const char *prompt, int i)
 	return (i);
 }
 
-// int	handle_special(t_token **token_list, const char *prompt, int i)
-// {
-// 	if (prompt[i] == '<' || prompt[i] == '>')
-// 		i = handle_redirection(token_list, prompt, i);
-// 	else if (prompt[i] == '|')
-// 		i = handle_pipe(token_list, prompt, i);
-// 	else if (prompt[i] == '&' || prompt[i] == ';' || prompt[i] == '!')
-// 		i = handle_special_inv(token_list, prompt, i);
-// 	// else if (prompt[i] == '\'' || prompt[i] == '\"')
-// 	// 	i = ft_quotes_token(token_list, prompt, i);
-// 	else if (prompt[i] == '\'' || prompt[i] == '\"')
-// 	{
-// 		char	*quoted;
-// 		char	*joined;
-// 		char	*rest;
-// 		int		start;
-
-// 		quoted = ft_quotes_token(prompt, &i);
-// 		if (!quoted)
-// 			return (-1);
-// 		start = i;
-// 		while (prompt[i] && !ft_isspace(prompt[i])
-// 		&& prompt[i] != '|' && prompt[i] != '<' && prompt[i] != '>'
-// 		&& prompt[i] != '\'' && prompt[i] != '\"')
-// 		i++;
-// 		if (i > start)
-// 		{
-// 			rest = ft_substr(prompt, start, i - start);
-// 			joined = ft_strjoin(quoted, rest);
-// 			free(quoted);
-// 			free(rest);
-// 			ft_add_token(token_list, ft_new_token(T_WORD, joined));
-// 		}
-// 		else
-// 			ft_add_token(token_list, ft_new_token(T_D_QUOTE, quoted));
-// 	}
-// 	else if (prompt[i] == '$')
-// 		i = ft_var_token(token_list, prompt, i);
-// 	return (i);
-// }
-
-int	handle_special(t_token **token_list, const char *prompt, int i)
+int	ft_handle_special(t_token **token_list, const char *prompt, int i)
 {
 	if (prompt[i] == '<' || prompt[i] == '>')
-		i = handle_redirection(token_list, prompt, i);
+		i = ft_handle_redirection(token_list, prompt, i);
 	else if (prompt[i] == '|')
-		i = handle_pipe(token_list, prompt, i);
+		i = ft_handle_pipe(token_list, prompt, i);
 	else if (prompt[i] == '&' || prompt[i] == ';' || prompt[i] == '!')
-		i = handle_special_inv(token_list, prompt, i);
+		i = ft_handle_special_inv(token_list, prompt, i);
 	else if (prompt[i] == '\'' || prompt[i] == '\"')
-	{
-		char	quote;
-		char	*quoted;
-		char	*joined;
-		char	*rest;
-		int		start;
-
-		quote = prompt[i];
-		quoted = ft_quotes_token(prompt, &i);
-		if (!quoted)
-			return (-1);
-		if (quote == '"')
-		{
-			start = i;
-			while (prompt[i] && !ft_isspace(prompt[i])
-				&& prompt[i] != '|' && prompt[i] != '<'
-				&& prompt[i] != '>' && prompt[i] != '\'' && prompt[i] != '\"')
-				i++;
-			if (i > start)
-			{
-				rest = ft_substr(prompt, start, i - start);
-				joined = ft_strjoin(quoted, rest);
-				free(quoted);
-				free(rest);
-				ft_add_token(token_list, ft_new_token(T_WORD, joined));
-			}
-			else
-				ft_add_token(token_list, ft_new_token(T_D_QUOTE, quoted));
-		}
-		else if (quote == '\'')
-		{
-			ft_add_token(token_list, ft_new_token(T_S_QUOTE, quoted));
-		}
-	}
+		i = ft_handle_quote_token(token_list, prompt, i);
 	else if (prompt[i] == '$')
 		i = ft_var_token(token_list, prompt, i);
 	return (i);
 }
 
-int	handle_invalid(t_token **token_list, const char *prompt, int i)
+int	ft_handle_invalid(t_token **token_list, const char *prompt, int i)
 {
 	char	*str;
 
@@ -145,7 +71,7 @@ int	handle_invalid(t_token **token_list, const char *prompt, int i)
 	return (i);
 }
 
-int	handle_special_inv(t_token **token_list, const char *prompt, int i)
+int	ft_handle_special_inv(t_token **token_list, const char *prompt, int i)
 {
 	if (prompt[i] == '&')
 	{
