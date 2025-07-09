@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 09:55:21 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/07/08 11:47:30 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/07/08 12:48:19 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ typedef struct s_command
 	char						*outfile;
 	int							append;
 	int							heredoc;
+	char						*delimit; //delimitador para heredoc
 	struct s_command			*next;
 }								t_command;
 
