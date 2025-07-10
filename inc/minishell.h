@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 09:55:21 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/07/08 12:48:19 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/07/10 12:15:02 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,8 +197,8 @@ void							ft_executor(t_command *cmd_list,
 void							ft_free_token_list(t_token **tokens);
 void							ft_free_split(char **s);
 void							ft_puterror(char *err, char *cmd);
-void							print_exec_error(char *cmd);
-void							print_fd_error(char *call);
+void							ft_print_exec_error(char *cmd);
+void							ft_print_fd_error(char *call);
 
 // Main
 char							*ft_get_user_input(void);
