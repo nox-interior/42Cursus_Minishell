@@ -45,6 +45,7 @@ PARSER		= $(SRC_DIR)parser/01_main_parser.c \
 			  $(SRC_DIR)parser/04_free_parser.c
 
 EXIT		= $(SRC_DIR)exit/01_free.c \
+			  $(SRC_DIR)exit/02_error.c \
 
 SIGNALS		= $(SRC_DIR)signals/01_signals.c
 

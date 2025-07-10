@@ -20,18 +20,6 @@ static void	ft_handle_child_status(int status, t_shell *shell)
 		shell->exit_status = 128 + WTERMSIG(status);
 }
 
-static void	ft_puterror(char *err, char *cmd)
-{
-	ft_putstr_fd("minishell: ", 2);
-	if (cmd)
-	{
-		ft_putstr_fd(cmd, 2);
-		ft_putstr_fd(": ", 2);
-	}
-	ft_putstr_fd(err, 2);
-	ft_putstr_fd("\n", 2);
-}
-
 static char	*ft_find_in_path(const char *cmd, t_shell *shell)
 {
 	char	*path;
@@ -90,14 +78,14 @@ static void	ft_fork_and_exec(t_command *cmd, t_shell *shell)
 	pid = fork();
 	if (pid < 0)
 	{
-		perror("minishell: fork");
+		print_fd_error("fork");
 		shell->exit_status = 1;
 		return ;
 	}
 	if (pid == 0)
 	{
 		execve(cmd_path, cmd->argv, shell->envp);
-		perror("minishell");
+		print_exec_error(cmd_path);
 		exit(127);
 	}
 	waitpid(pid, &status, 0);
