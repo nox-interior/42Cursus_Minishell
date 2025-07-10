@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 18:00:25 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/06/24 10:16:21 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/07/10 12:17:05 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,14 +78,14 @@ static void	ft_fork_and_exec(t_command *cmd, t_shell *shell)
 	pid = fork();
 	if (pid < 0)
 	{
-		print_fd_error("fork");
+		ft_print_fd_error("fork");
 		shell->exit_status = 1;
 		return ;
 	}
 	if (pid == 0)
 	{
 		execve(cmd_path, cmd->argv, shell->envp);
-		print_exec_error(cmd_path);
+		ft_print_exec_error(cmd_path);
 		exit(127);
 	}
 	waitpid(pid, &status, 0);
