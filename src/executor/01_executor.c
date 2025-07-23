@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 18:00:25 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/07/10 12:17:05 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/07/23 12:08:15 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,49 @@ static char	*ft_find_in_path(const char *cmd, t_shell *shell)
 	return (NULL);
 }
 
+static int	ft_setup_input_redirection(t_command *cmd)
+{
+	int	fd_in;
+
+	if (!cmd->infile)
+		return (0);
+	fd_in = open(cmd->infile, O_RDONLY);
+	if (fd_in == -1)
+		return (perror("minishell"), -1);
+	dup2(fd_in, STDIN_FILENO);
+	close(fd_in);
+	return (0);
+}
+
+static int	ft_setup_output_redirection(t_command *cmd)
+{
+	int	fd_out;
+	int	flags;
+
+	if (!cmd->outfile)
+		return (0);
+	flags = O_WRONLY | O_CREAT;
+	if (cmd->append)
+		flags = flags | O_APPEND;
+	else
+		flags = flags | O_TRUNC;
+	fd_out = open(cmd->outfile, flags, 0644);
+	if (fd_out == -1)
+		return (perror("minishell"), -1);
+	dup2(fd_out, STDOUT_FILENO);
+	close(fd_out);
+	return (0);
+}
+
+static int	ft_setup_redirection(t_command *cmd)
+{
+	if (ft_setup_input_redirection(cmd) == -1)
+		return (-1);
+	if (ft_setup_output_redirection(cmd) == -1)
+		return (-1);
+	return (0);
+}
+
 static void	ft_fork_and_exec(t_command *cmd, t_shell *shell)
 {
 	pid_t	pid;
@@ -84,12 +127,57 @@ static void	ft_fork_and_exec(t_command *cmd, t_shell *shell)
 	}
 	if (pid == 0)
 	{
+		if (ft_setup_redirection(cmd) == -1)
+			exit(1);
 		execve(cmd_path, cmd->argv, shell->envp);
 		ft_print_exec_error(cmd_path);
 		exit(127);
 	}
 	waitpid(pid, &status, 0);
 	ft_handle_child_status(status, shell);
+}
+
+static int	ft_setup_input_redirection(t_command *cmd)
+{
+	int	fd_in;
+
+	if (!cmd->infile)
+		return (0);
+	fd_in = open(cmd->infile, O_RDONLY);
+	if (fd_in == -1)
+		return (perror("minishell"), -1);
+	dup2(fd_in, STDIN_FILENO);
+	close(fd_in);
+	return (0);
+}
+
+static int	ft_setup_output_redirection(t_command *cmd)
+{
+	int	fd_out;
+	int	flags;
+
+	if (!cmd->outfile)
+		return (0);
+	flags = O_WRONLY | O_CREAT;
+	if (cmd->append)
+		flags = flags | O_APPEND;
+	else
+		flags = flags | O_TRUNC;
+	fd_out = open(cmd->outfile, flags, 0644);
+	if (fd_out == -1)
+		return (perror("minishell"), -1);
+	dup2(fd_out, STDOUT_FILENO);
+	close(fd_out);
+	return (0);
+}
+
+static int	ft_setup_redirection(t_command *cmd)
+{
+	if (ft_setup_input_redirection(cmd) == -1)
+		return (-1);
+	if (ft_setup_output_redirection(cmd) == -1)
+		return (-1);
+	return (0);
 }
 
 void	ft_executor(t_command *cmd_list, t_shell *shell)
