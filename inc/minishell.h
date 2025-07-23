@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 09:55:21 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/07/10 12:15:02 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/07/23 12:16:52 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "../libft/inc/get_next_line.h"
 # include "../libft/inc/libft.h"
 # include <errno.h>
+# include <fcntl.h>
 # include <linux/limits.h>
 # include <readline/history.h>
 # include <readline/readline.h>
@@ -70,7 +71,7 @@ typedef struct s_command
 	char						*outfile;
 	int							append;
 	int							heredoc;
-	char						*delimit; //delimitador para heredoc
+	char *delimit; // delimitador para heredoc
 	struct s_command			*next;
 }								t_command;
 

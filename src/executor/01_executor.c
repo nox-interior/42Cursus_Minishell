@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 18:00:25 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/07/23 12:10:30 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/07/23 12:19:12 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,12 @@ static int	ft_setup_output_redirection(t_command *cmd)
 	int	flags;
 
 	if (!cmd->outfile)
+	{
+		printf("DEBUG: No outfile found\n");
 		return (0);
+	}
+	printf("DEBUG: Setting up redirection to: %s (append: %d)\n", cmd->outfile,
+		cmd->append);
 	flags = O_WRONLY | O_CREAT;
 	if (cmd->append)
 		flags = flags | O_APPEND;
@@ -91,7 +96,11 @@ static int	ft_setup_output_redirection(t_command *cmd)
 		flags = flags | O_TRUNC;
 	fd_out = open(cmd->outfile, flags, 0644);
 	if (fd_out == -1)
+	{
+		printf("DEBUG: Failed to open file: %s\n", cmd->outfile);
 		return (perror("minishell"), -1);
+	}
+	printf("DEBUG: File opened successfully, fd: %d\n", fd_out);
 	dup2(fd_out, STDOUT_FILENO);
 	close(fd_out);
 	return (0);
@@ -144,6 +153,10 @@ void	ft_executor(t_command *cmd_list, t_shell *shell)
 		shell->exit_status = 0;
 		return ;
 	}
+	printf("DEBUG: Executing command: %s\n", cmd_list->argv[0]);
+	printf("DEBUG: Is builtin: %d\n", ft_is_builtin(cmd_list));
+	if (cmd_list->outfile)
+		printf("DEBUG: Has outfile: %s\n", cmd_list->outfile);
 	if (ft_is_builtin(cmd_list))
 	{
 		shell->exit_status = ft_exec_builtin(cmd_list, shell);
