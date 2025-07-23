@@ -32,6 +32,8 @@ int	ft_exec_builtin(t_command *cmd, t_shell *shell)
 {
 	if (!cmd || !cmd->argv || !cmd->argv[0])
 		return (1);
+	if (ft_setup_redirection(cmd) == -1)
+			exit(1);
 	if (ft_strcmp(cmd->argv[0], "echo") == 0)
 		return (ft_exec_builtin_echo(cmd, shell));
 	if (ft_strcmp(cmd->argv[0], "cd") == 0)

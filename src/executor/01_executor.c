@@ -63,7 +63,7 @@ static char	*ft_find_in_path(const char *cmd, t_shell *shell)
 	return (NULL);
 }
 
-static int	ft_setup_input_redirection(t_command *cmd)
+int	ft_setup_input_redirection(t_command *cmd)
 {
 	int	fd_in;
 
@@ -77,7 +77,7 @@ static int	ft_setup_input_redirection(t_command *cmd)
 	return (0);
 }
 
-static int	ft_setup_output_redirection(t_command *cmd)
+int	ft_setup_output_redirection(t_command *cmd)
 {
 	int	fd_out;
 	int	flags;
@@ -106,7 +106,7 @@ static int	ft_setup_output_redirection(t_command *cmd)
 	return (0);
 }
 
-static int	ft_setup_redirection(t_command *cmd)
+int	ft_setup_redirection(t_command *cmd)
 {
 	if (ft_setup_input_redirection(cmd) == -1)
 		return (-1);

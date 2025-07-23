@@ -188,6 +188,11 @@ int								ft_exec_builtin_unset(t_command *cmd,
 int								ft_exec_builtin_exit(t_command *cmd,
 									t_shell *shell);
 
+// Redirections
+int								ft_setup_redirection(t_command *cmd);
+int								ft_setup_input_redirection(t_command *cmd);
+int								ft_setup_output_redirection(t_command *cmd);
+
 // Executor
 bool							ft_is_builtin(t_command *cmd);
 int								ft_exec_builtin(t_command *cmd, t_shell *shell);
