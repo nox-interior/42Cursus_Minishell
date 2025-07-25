@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 09:55:21 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/07/23 12:16:52 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/07/24 14:25:05 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,6 +197,15 @@ int								ft_setup_output_redirection(t_command *cmd);
 bool							ft_is_builtin(t_command *cmd);
 int								ft_exec_builtin(t_command *cmd, t_shell *shell);
 void							ft_executor(t_command *cmd_list,
+									t_shell *shell);
+char							*ft_find_in_path(const char *cmd,
+									t_shell *shell);
+int								ft_has_pipes(t_command *cmd_list);
+void							ft_close_all_pipes(int **pipes, int pipe_count);
+void							ft_wait_all_children(int child_count);
+int								ft_count_commands(t_command *cmd_list);
+int								**ft_create_pipes(int pipe_count);
+void							ft_execute_pipeline(t_command *cmd_list,
 									t_shell *shell);
 
 // Exit and Free

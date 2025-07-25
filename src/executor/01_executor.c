@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 18:00:25 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/07/23 12:45:19 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/07/24 14:58:12 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	ft_handle_child_status(int status, t_shell *shell)
 		shell->exit_status = 128 + WTERMSIG(status);
 }
 
-static char	*ft_find_in_path(const char *cmd, t_shell *shell)
+char	*ft_find_in_path(const char *cmd, t_shell *shell)
 {
 	char	*path;
 	char	**dir;
@@ -142,6 +142,11 @@ void	ft_executor(t_command *cmd_list, t_shell *shell)
 	if (!cmd_list || !cmd_list->argv || !cmd_list->argv[0])
 	{
 		shell->exit_status = 0;
+		return ;
+	}
+	if (ft_has_pipes(cmd_list))
+	{
+		ft_execute_pipeline(cmd_list, shell);
 		return ;
 	}
 	if (ft_is_builtin(cmd_list))

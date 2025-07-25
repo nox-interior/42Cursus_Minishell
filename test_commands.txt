@@ -1,0 +1,9 @@
+echo "hello" | cat
+echo "test multiple words" | cat  
+echo "pipeline" | cat | cat
+echo "triple" | cat | cat | cat
+ls | wc -l
+env | grep USER
+pwd | cat
+echo -n "no newline" | cat
+exit
