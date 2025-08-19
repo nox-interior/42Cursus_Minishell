@@ -2,5 +2,5 @@
 ./a.out
 .gitignore
 *.wps
-*.md
+//*.md
 token_discarded_functions.c
