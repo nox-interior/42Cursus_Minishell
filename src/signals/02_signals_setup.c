@@ -1,37 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   01_signals.c                                       :+:      :+:    :+:   */
+/*   02_signals_setup.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/11 10:47:58 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/08/19 14:33:32 by amarroyo         ###   ########.fr       */
+/*   Created: 2025/08/19 12:00:00 by amarroyo          #+#    #+#             */
+/*   Updated: 2025/08/19 15:07:19 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-volatile sig_atomic_t	g_signal = 0;
-
-void	ft_handle_sigint(int sig)
+void	ft_setup_noninteractive_signals(void)
 {
-	(void)sig;
-	g_signal = SIGINT + 128;
-	write(1, "\n", 1);
-	rl_replace_line("", 0);
-	rl_on_new_line();
-	rl_redisplay();
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
 }
 
-// No hace nada, como en bash
-void	ft_handle_sigquit(int sig)
+void	ft_setup_signals(void)
 {
-	(void)sig;
+	if (isatty(STDIN_FILENO))
+		ft_setup_interactive_signals();
+	else
+		ft_setup_noninteractive_signals();
 }
 
-void	ft_setup_interactive_signals(void)
+void	ft_setup_child_signals(void)
 {
-	signal(SIGINT, ft_handle_sigint);
-	signal(SIGQUIT, ft_handle_sigquit);
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
 }

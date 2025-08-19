@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 09:42:39 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/06/16 19:20:27 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/08/19 15:07:19 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int	main(int argc, char **argv, char **envp)
 	if (!shell.envp)
 		return (perror("minishell: malloc"), 1);
 	shell.exit_status = 0;
-	ft_setup_interactive_signals();
+	ft_setup_signals();
 	ft_minishell_loop(&shell);
 	return (shell.exit_status);
 }

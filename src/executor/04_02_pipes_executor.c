@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 11:08:43 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/07/24 14:25:24 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/08/19 15:07:15 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,10 @@ static void	ft_execute_single_command(t_command *current, int **pipes, int i,
 	pid = fork();
 	if (pid == 0)
 	{
+		ft_setup_child_signals();
 		ft_setup_child_pipes(pipes, i, pipe_count, current);
+		if (ft_setup_redirection(current) == -1)
+			exit(1);
 		cmd_path = ft_get_cmd_path(current, shell);
 		if (!cmd_path)
 			exit(127);

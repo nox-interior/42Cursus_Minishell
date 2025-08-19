@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 09:55:21 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/07/24 14:25:05 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/08/19 15:07:19 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,6 +151,9 @@ t_command						*ft_parse_command(t_token *token_list,
 void							ft_handle_sigint(int sig);
 void							ft_handle_sigquit(int sig);
 void							ft_setup_interactive_signals(void);
+void							ft_setup_noninteractive_signals(void);
+void							ft_setup_signals(void);
+void							ft_setup_child_signals(void);
 
 // Env
 char							**ft_copy_env(char **envp);

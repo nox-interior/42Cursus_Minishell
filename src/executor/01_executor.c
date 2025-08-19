@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 18:00:25 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/07/24 14:15:41 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/08/19 15:07:19 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,7 @@ static void	ft_fork_and_exec(t_command *cmd, t_shell *shell)
 	}
 	if (pid == 0)
 	{
+		ft_setup_child_signals();
 		if (ft_setup_redirection(cmd) == -1)
 			exit(1);
 		execve(cmd_path, cmd->argv, shell->envp);
