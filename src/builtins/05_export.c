@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 10:51:12 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/06/23 13:56:00 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/08/19 19:09:30 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,22 @@ static void	ft_export_put_error(t_shell *shell)
 {
 	ft_putstr_fd("minishell: export: malloc error\n", 2);
 	shell->exit_status = 1;
+}
+
+static char	*ft_remove_quotes(char *value)
+{
+	int		len;
+	char	*unquoted;
+
+	len = ft_strlen(value);
+	if (len >= 2 && ((value[0] == '"' && value[len - 1] == '"')
+			|| (value[0] == '\'' && value[len - 1] == '\'')))
+	{
+		unquoted = ft_substr(value, 1, len - 2);
+		free(value);
+		return (unquoted);
+	}
+	return (value);
 }
 
 static void	ft_export_set_var(char *arg, t_shell *shell)
@@ -31,12 +47,10 @@ static void	ft_export_set_var(char *arg, t_shell *shell)
 	name = ft_substr(arg, 0, equal - arg);
 	value = ft_strdup(equal + 1);
 	if (!name || !value)
-	{
-		free(name);
-		free(value);
-		ft_export_put_error(shell);
-		return ;
-	}
+		return (free(name), free(value), ft_export_put_error(shell));
+	value = ft_remove_quotes(value);
+	if (!value)
+		return (free(name), ft_export_put_error(shell));
 	res = ft_update_env_var(&shell->envp, name, value);
 	if (res != 0)
 		ft_export_put_error(shell);

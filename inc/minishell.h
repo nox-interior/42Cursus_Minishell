@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 09:55:21 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/08/19 15:07:19 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/08/19 19:10:38 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,16 +71,29 @@ typedef struct s_command
 	char						*outfile;
 	int							append;
 	int							heredoc;
-	char *delimit; // delimitador para heredoc
+	char						*delimit;
 	struct s_command			*next;
 }								t_command;
 
+// Forward declaration
+typedef struct s_shell			t_shell;
+
+// Structure for pipe execution parameters
+typedef struct s_pipe_params
+{
+	t_command					*current;
+	int							**pipes;
+	int							i;
+	int							pipe_count;
+	t_shell						*shell;
+}								t_pipe_params;
+
 // Environment copy structure
-typedef struct s_shell
+struct s_shell
 {
 	char						**envp;
 	int							exit_status;
-}								t_shell;
+};
 
 // Tokenizer
 t_token							*ft_tokenizer(const char *prompt);
@@ -202,6 +215,10 @@ int								ft_exec_builtin(t_command *cmd, t_shell *shell);
 void							ft_executor(t_command *cmd_list,
 									t_shell *shell);
 char							*ft_find_in_path(const char *cmd,
+									t_shell *shell);
+char							*ft_get_cmd_path(t_command *cmd,
+									t_shell *shell);
+void							ft_fork_and_exec(t_command *cmd,
 									t_shell *shell);
 int								ft_has_pipes(t_command *cmd_list);
 void							ft_close_all_pipes(int **pipes, int pipe_count);

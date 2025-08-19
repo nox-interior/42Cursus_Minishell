@@ -6,7 +6,7 @@
 #    By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/02 16:26:23 by amarroyo          #+#    #+#              #
-#    Updated: 2025/08/19 15:07:18 by amarroyo         ###   ########.fr        #
+#    Updated: 2025/08/19 19:09:29 by amarroyo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,7 +53,9 @@ SIGNALS		= $(SRC_DIR)signals/01_signals.c \
 EXECUTOR	= $(SRC_DIR)executor/01_executor.c \
 			  $(SRC_DIR)executor/02_builtin_executor.c \
 			  $(SRC_DIR)executor/04_01_pipes_executor.c \
-			  $(SRC_DIR)executor/04_02_pipes_executor.c
+			  $(SRC_DIR)executor/04_02_pipes_executor.c \
+			  $(SRC_DIR)executor/03_executor_utils.c \
+			  $(SRC_DIR)executor/03_executor_utils_2.c
 
 BUILTINS	= $(SRC_DIR)builtins/01_echo.c \
 			  $(SRC_DIR)builtins/02_pwd.c \
