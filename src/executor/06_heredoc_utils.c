@@ -55,8 +55,10 @@ static int	ft_process_heredoc_line(char *line, int write_fd, int should_expand,
 		expanded = ft_expand_value(line, shell);
 	else
 		expanded = ft_strdup(line);
+	
 	write(write_fd, expanded, ft_strlen(expanded));
 	write(write_fd, "\n", 1);
+	
 	free(expanded);
 	return (0);
 }

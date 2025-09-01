@@ -26,10 +26,8 @@ int	ft_setup_heredoc(t_command *cmd, t_shell *shell)
 {
 	int	pipefd[2];
 
-	printf("DEBUG: Starting heredoc setup for delimit: [%s]\n", cmd->delimit);
 	if (ft_create_heredoc_pipe(pipefd) == -1)
 		return (-1);
-	printf("DEBUG: Created heredoc pipe [%d, %d]\n", pipefd[0], pipefd[1]);
 	if (ft_read_heredoc_lines(pipefd[1], cmd->delimit, shell) == -1)
 	{
 		close(pipefd[0]);
@@ -37,10 +35,8 @@ int	ft_setup_heredoc(t_command *cmd, t_shell *shell)
 		return (-1);
 	}
 	close(pipefd[1]);
-	printf("DEBUG: About to dup2 heredoc fd %d to STDIN (fd 0)\n", pipefd[0]);
 	dup2(pipefd[0], STDIN_FILENO);
 	close(pipefd[0]);
-	printf("DEBUG: Heredoc setup complete\n");
 	return (0);
 }
 
