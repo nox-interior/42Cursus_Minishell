@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 00:00:00 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/09/01 16:12:54 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/09/01 17:38:50 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int	ft_should_expand_vars(const char *delimit)
 	len = ft_strlen(delimit);
 	if (len < 2)
 		return (1);
-	if ((delimit[0] == '"' && delimit[len - 1] == '"')
-		|| (delimit[0] == '\'' && delimit[len - 1] == '\''))
+	if ((delimit[0] == '"' && delimit[len - 1] == '"') || (delimit[0] == '\''
+			&& delimit[len - 1] == '\''))
 		return (0);
 	return (1);
 }
@@ -37,8 +37,8 @@ char	*ft_clean_delimit(char *delimit)
 	len = ft_strlen(delimit);
 	if (len < 2)
 		return (ft_strdup(delimit));
-	if ((delimit[0] == '"' && delimit[len - 1] == '"')
-		|| (delimit[0] == '\'' && delimit[len - 1] == '\''))
+	if ((delimit[0] == '"' && delimit[len - 1] == '"') || (delimit[0] == '\''
+			&& delimit[len - 1] == '\''))
 	{
 		clean = ft_substr(delimit, 1, len - 2);
 		return (clean);
@@ -47,7 +47,7 @@ char	*ft_clean_delimit(char *delimit)
 }
 
 static int	ft_process_heredoc_line(char *line, int write_fd, int should_expand,
-	t_shell *shell)
+		t_shell *shell)
 {
 	char	*expanded;
 
@@ -55,10 +55,8 @@ static int	ft_process_heredoc_line(char *line, int write_fd, int should_expand,
 		expanded = ft_expand_value(line, shell);
 	else
 		expanded = ft_strdup(line);
-	
 	write(write_fd, expanded, ft_strlen(expanded));
 	write(write_fd, "\n", 1);
-	
 	free(expanded);
 	return (0);
 }
