@@ -6,7 +6,7 @@
 #    By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/02 16:26:23 by amarroyo          #+#    #+#              #
-#    Updated: 2025/09/01 15:53:01 by amarroyo         ###   ########.fr        #
+#    Updated: 2025/09/01 16:12:54 by amarroyo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,8 @@ VAR_EXP		= $(SRC_DIR)var_exp/01_var_exp.c
 PARSER		= $(SRC_DIR)parser/01_main_parser.c \
 			  $(SRC_DIR)parser/02_aux_parser.c \
 			  $(SRC_DIR)parser/03_command_parser.c \
-			  $(SRC_DIR)parser/04_free_parser.c
+			  $(SRC_DIR)parser/04_free_parser.c \
+			  $(SRC_DIR)parser/05_command_parser_utils.c
 
 EXIT		= $(SRC_DIR)exit/01_free.c \
 			  $(SRC_DIR)exit/02_error.c \
@@ -55,6 +56,7 @@ EXECUTOR	= $(SRC_DIR)executor/01_executor.c \
 			  $(SRC_DIR)executor/04_01_pipes_executor.c \
 			  $(SRC_DIR)executor/04_02_pipes_executor.c \
 			  $(SRC_DIR)executor/05_heredoc.c \
+			  $(SRC_DIR)executor/06_heredoc_utils.c \
 			  $(SRC_DIR)executor/03_executor_utils.c \
 			  $(SRC_DIR)executor/03_executor_utils_2.c
 

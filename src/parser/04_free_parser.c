@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 12:39:34 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/09/01 15:53:01 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/09/01 16:12:54 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,29 @@ void	ft_free_command_partial(t_command *cmd, t_list *args)
 		ft_lstclear(&args, free);
 }
 
+static void	ft_free_command_content(t_command *cmd)
+{
+	int	i;
+
+	if (cmd->argv)
+	{
+		i = 0;
+		while (cmd->argv[i])
+			free(cmd->argv[i++]);
+		free(cmd->argv);
+	}
+	if (cmd->infile)
+		free(cmd->infile);
+	if (cmd->outfile)
+		free(cmd->outfile);
+	if (cmd->delimit)
+		free(cmd->delimit);
+}
+
 void	ft_free_command_list(t_command **cmd_list)
 {
 	t_command	*current;
 	t_command	*next;
-	int			i;
 
 	if (!cmd_list || !*cmd_list)
 		return ;
@@ -40,19 +58,7 @@ void	ft_free_command_list(t_command **cmd_list)
 	while (current)
 	{
 		next = current->next;
-		if (current->argv)
-		{
-			i = 0;
-			while (current->argv[i])
-				free(current->argv[i++]);
-			free(current->argv);
-		}
-		if (current->infile)
-			free(current->infile);
-		if (current->outfile)
-			free(current->outfile);
-		if (current->delimit)
-			free(current->delimit);
+		ft_free_command_content(current);
 		free(current);
 		current = next;
 	}
