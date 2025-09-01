@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 18:00:25 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/08/19 19:09:30 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/09/01 14:34:22 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,7 @@ void	ft_executor(t_command *cmd_list, t_shell *shell)
 	else
 	{
 		if (ft_is_builtin(cmd_list))
-		{
-			if (ft_setup_redirection(cmd_list) != -1)
-				ft_exec_builtin(cmd_list, shell);
-		}
+			ft_exec_builtin(cmd_list, shell);
 		else
 			ft_fork_and_exec(cmd_list, shell);
 	}
