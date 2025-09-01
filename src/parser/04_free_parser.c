@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 12:39:34 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/05/18 12:58:51 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/09/01 15:53:01 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	ft_free_command_partial(t_command *cmd, t_list *args)
 			free(cmd->infile);
 		if (cmd->outfile)
 			free(cmd->outfile);
+		if (cmd->delimit)
+			free(cmd->delimit);
 		free(cmd);
 	}
 	if (args)
@@ -49,6 +51,8 @@ void	ft_free_command_list(t_command **cmd_list)
 			free(current->infile);
 		if (current->outfile)
 			free(current->outfile);
+		if (current->delimit)
+			free(current->delimit);
 		free(current);
 		current = next;
 	}

@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 12:42:05 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/06/12 13:59:30 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/09/01 15:53:01 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 int	ft_process_redirection(t_command *cmd, t_token **current)
 {
 	char	*redir_target;
+	char	*quote_char;
+	char	*temp1;
+	char	*temp2;
 
 	if (!(*current)->next || !ft_is_valid_arg_token((*current)->next->type))
 		return (-1);
@@ -23,8 +26,27 @@ int	ft_process_redirection(t_command *cmd, t_token **current)
 		return (-1);
 	if ((*current)->type == T_REDIR_IN || (*current)->type == T_HEREDOC)
 	{
-		cmd->infile = redir_target;
-		cmd->heredoc = ((*current)->type == T_HEREDOC);
+		if ((*current)->type == T_HEREDOC)
+		{
+			if ((*current)->next->type == T_S_QUOTE
+				|| (*current)->next->type == T_D_QUOTE)
+			{
+				quote_char = ((*current)->next->type == T_S_QUOTE) ? "'" : "\"";
+				temp1 = ft_strjoin(quote_char, redir_target);
+				temp2 = ft_strjoin(temp1, quote_char);
+				free(temp1);
+				free(redir_target);
+				cmd->delimit = temp2;
+			}
+			else
+				cmd->delimit = redir_target;
+			cmd->heredoc = 1;
+		}
+		else
+		{
+			cmd->infile = redir_target;
+			cmd->heredoc = 0;
+		}
 	}
 	else
 	{

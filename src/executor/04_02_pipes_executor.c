@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 11:08:43 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/08/19 19:09:30 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/09/01 15:53:01 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	ft_setup_and_exec(t_pipe_params *params)
 {
 	char	*cmd_path;
 
-	if (ft_setup_redirection(params->current) == -1)
+	if (ft_setup_redirection(params->current, params->shell) == -1)
 		exit(1);
 	cmd_path = ft_get_cmd_path(params->current, params->shell);
 	if (!cmd_path)

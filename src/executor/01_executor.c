@@ -6,16 +6,18 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 18:00:25 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/09/01 14:34:22 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/09/01 15:53:01 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-int	ft_setup_input_redirection(t_command *cmd)
+int	ft_setup_input_redirection(t_command *cmd, t_shell *shell)
 {
 	int	fd;
 
+	if (cmd->heredoc)
+		return (ft_setup_heredoc(cmd, shell));
 	if (cmd->infile)
 	{
 		fd = open(cmd->infile, O_RDONLY);
@@ -51,9 +53,9 @@ int	ft_setup_output_redirection(t_command *cmd)
 	return (0);
 }
 
-int	ft_setup_redirection(t_command *cmd)
+int	ft_setup_redirection(t_command *cmd, t_shell *shell)
 {
-	if (ft_setup_input_redirection(cmd) == -1)
+	if (ft_setup_input_redirection(cmd, shell) == -1)
 		return (-1);
 	if (ft_setup_output_redirection(cmd) == -1)
 		return (-1);

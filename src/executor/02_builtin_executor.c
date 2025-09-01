@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 18:04:01 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/08/19 19:09:30 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/09/01 15:53:01 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	ft_exec_builtin(t_command *cmd, t_shell *shell)
 		return (1);
 	saved_stdin = dup(STDIN_FILENO);
 	saved_stdout = dup(STDOUT_FILENO);
-	if (ft_setup_redirection(cmd) == -1)
+	if (ft_setup_redirection(cmd, shell) == -1)
 	{
 		close(saved_stdin);
 		close(saved_stdout);

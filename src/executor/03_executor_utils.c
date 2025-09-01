@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 00:00:00 by nox               #+#    #+#             */
-/*   Updated: 2025/08/19 19:09:30 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/09/01 15:53:01 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	ft_handle_child_status(int status, t_shell *shell)
 static void	ft_exec_child_process(t_command *cmd, t_shell *shell, char *path)
 {
 	ft_setup_child_signals();
-	if (ft_setup_redirection(cmd) == -1)
+	if (ft_setup_redirection(cmd, shell) == -1)
 		exit(1);
 	execve(path, cmd->argv, shell->envp);
 	ft_print_exec_error(path);

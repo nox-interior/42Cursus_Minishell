@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 09:55:21 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/08/19 19:13:47 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/09/01 15:53:01 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,8 +204,10 @@ int								ft_exec_builtin_exit(t_command *cmd,
 									t_shell *shell);
 
 // Redirections
-int								ft_setup_redirection(t_command *cmd);
-int								ft_setup_input_redirection(t_command *cmd);
+int								ft_setup_redirection(t_command *cmd,
+									t_shell *shell);
+int								ft_setup_input_redirection(t_command *cmd,
+									t_shell *shell);
 int								ft_setup_output_redirection(t_command *cmd);
 
 // Executor
@@ -218,6 +220,8 @@ char							*ft_find_in_path(const char *cmd,
 char							*ft_get_cmd_path(t_command *cmd,
 									t_shell *shell);
 void							ft_fork_and_exec(t_command *cmd,
+									t_shell *shell);
+int								ft_setup_heredoc(t_command *cmd,
 									t_shell *shell);
 int								ft_has_pipes(t_command *cmd_list);
 void							ft_close_all_pipes(int **pipes, int pipe_count);
