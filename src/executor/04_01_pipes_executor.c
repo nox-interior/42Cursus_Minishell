@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 11:08:28 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/07/24 14:15:48 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/09/01 17:20:40 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ int	ft_count_commands(t_command *cmd_list)
 	t_command	*current;
 	int			count;
 
+	if (!cmd_list)
+		return (0);
 	current = cmd_list;
 	count = 0;
 	while (current)

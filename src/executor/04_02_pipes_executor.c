@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 11:08:43 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/09/01 15:53:01 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/09/01 17:20:40 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,13 @@ static void	ft_setup_child_pipes(int **pipes, int i, int pipe_count,
 		t_command *current)
 {
 	if (i > 0)
+	{
 		dup2(pipes[i - 1][0], STDIN_FILENO);
+	}
 	if (current->next)
+	{
 		dup2(pipes[i][1], STDOUT_FILENO);
+	}
 	ft_close_all_pipes(pipes, pipe_count);
 }
 
@@ -76,6 +80,10 @@ void	ft_execute_pipeline(t_command *cmd_list, t_shell *shell)
 	int	pipe_count;
 	int	**pipes;
 
+	if (!cmd_list)
+		return ;
+	if (ft_preprocess_heredocs(cmd_list, shell) == -1)
+		return ;
 	pipe_count = ft_count_commands(cmd_list);
 	pipes = ft_create_pipes(pipe_count);
 	if (!pipes)

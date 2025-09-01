@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 18:00:25 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/09/01 15:53:01 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/09/01 17:20:40 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,12 @@ int	ft_setup_input_redirection(t_command *cmd, t_shell *shell)
 {
 	int	fd;
 
+	if (cmd->heredoc && cmd->heredoc_fd != -1)
+	{
+		dup2(cmd->heredoc_fd, STDIN_FILENO);
+		close(cmd->heredoc_fd);
+		return (0);
+	}
 	if (cmd->heredoc)
 		return (ft_setup_heredoc(cmd, shell));
 	if (cmd->infile)

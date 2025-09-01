@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 09:55:21 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/09/01 16:12:54 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/09/01 17:21:26 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,60 +33,66 @@
 extern volatile sig_atomic_t	g_signal;
 
 // Token codes
-typedef enum e_tok_type {
-  T_NONE,
-  T_SPACES,
-  T_WORD,
-  T_S_QUOTE,
-  T_D_QUOTE,
-  T_VAR,
-  T_PIPE,
-  T_REDIR_IN,
-  T_REDIR_OUT,
-  T_HEREDOC,
-  T_APPEND,
-  T_SEMICOLON,
-  T_EXCLAMATION,
-  T_AMPERSAND,
-  T_AND,
-  T_OR,
-  T_INVALID
+typedef enum e_tok_type
+{
+	T_NONE,
+	T_SPACES,
+	T_WORD,
+	T_S_QUOTE,
+	T_D_QUOTE,
+	T_VAR,
+	T_PIPE,
+	T_REDIR_IN,
+	T_REDIR_OUT,
+	T_HEREDOC,
+	T_APPEND,
+	T_SEMICOLON,
+	T_EXCLAMATION,
+	T_AMPERSAND,
+	T_AND,
+	T_OR,
+	T_INVALID
 }								t_tok_type;
 
 // Token Structure: lexical level
-typedef struct s_token {
-  t_tok_type type;
-  char *value;
-  struct s_token *next;
-  struct s_token *prev;
+typedef struct s_token
+{
+	t_tok_type					type;
+	char						*value;
+	struct s_token				*next;
+	struct s_token				*prev;
 }								t_token;
 
 // Command List Structure: syntactical level
-typedef struct s_command {
-  char **argv;
-  char *infile;
-  char *outfile;
-  int append;
-  int heredoc;
-  char *delimit;
-  struct s_command *next;
+typedef struct s_command
+{
+	char						**argv;
+	char						*infile;
+	char						*outfile;
+	int							append;
+	int							heredoc;
+	char						*delimit;
+	int							heredoc_fd;
+	struct s_command			*next;
 }								t_command;
 
 typedef struct s_shell			t_shell;
 
 // Structure for pipe execution parameters
-typedef struct s_pipe_params {
-  t_command *current;
-  int **pipes;
-  int i;
-  int pipe_count;
-  t_shell *shell;
+typedef struct s_pipe_params
+{
+	t_command					*current;
+	int							**pipes;
+	int							i;
+	int							pipe_count;
+	t_shell						*shell;
 }								t_pipe_params;
 
 // Environment copy structure
-struct s_shell {
-  char **envp;
-  int exit_status;
+struct							s_shell
+{
+	char						**envp;
+	int							exit_status;
 };
 
 // Tokenizer
@@ -141,16 +147,16 @@ int								ft_process_argument(t_list **args,
 									t_token *token);
 int								ft_process_redirection(t_command *cmd,
 									t_token **current);
-int	ft_process_redirection_extended(t_command *cmd, t_token **current,
-                                    char *redir_target);
+int								ft_process_redirection_extended(t_command *cmd,
+									t_token **current, char *redir_target);
 char							**ft_list_to_str_array(t_list *args);
 int								ft_parse_command_body(t_command *cmd,
 									t_token **current, t_list **args);
 t_command						*ft_create_command(t_token **current);
 int								ft_is_valid_token_sequence(t_token *tokens,
 									t_shell *shell);
-int	ft_add_command_to_list(t_command **head, t_command **tail,
-                           t_token **current);
+int								ft_add_command_to_list(t_command **head,
+									t_command **tail, t_token **current);
 void							ft_free_command_partial(t_command *cmd,
 									t_list *args);
 void							ft_free_command_list(t_command **cmd_list);
@@ -220,6 +226,10 @@ char							*ft_get_cmd_path(t_command *cmd,
 void							ft_fork_and_exec(t_command *cmd,
 									t_shell *shell);
 int								ft_setup_heredoc(t_command *cmd,
+									t_shell *shell);
+int								ft_create_heredoc_fd(t_command *cmd,
+									t_shell *shell);
+int								ft_preprocess_heredocs(t_command *cmd_list,
 									t_shell *shell);
 int								ft_should_expand_vars(const char *delimit);
 char							*ft_clean_delimit(char *delimit);

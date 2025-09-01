@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 12:37:49 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/09/01 15:53:01 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/09/01 17:20:40 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,6 @@ void	ft_init_command(t_command *cmd)
 	cmd->append = 0;
 	cmd->heredoc = 0;
 	cmd->delimit = NULL;
+	cmd->heredoc_fd = -1;
 	cmd->next = NULL;
 }

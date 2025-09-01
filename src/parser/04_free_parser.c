@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 12:39:34 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/09/01 16:12:54 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/09/01 17:22:19 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ static void	ft_free_command_content(t_command *cmd)
 		free(cmd->outfile);
 	if (cmd->delimit)
 		free(cmd->delimit);
+	if (cmd->heredoc_fd != -1)
+		close(cmd->heredoc_fd);
 }
 
 void	ft_free_command_list(t_command **cmd_list)
