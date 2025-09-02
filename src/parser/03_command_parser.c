@@ -26,6 +26,9 @@ int	ft_process_redirection(t_command *cmd, t_token **current)
 
 int	ft_parse_command_body(t_command *cmd, t_token **current, t_list **args)
 {
+	int	first_arg;
+
+	first_arg = 1;
 	while (*current && (*current)->type != T_PIPE)
 	{
 		if (ft_is_redirection((*current)->type))
@@ -36,8 +39,17 @@ int	ft_parse_command_body(t_command *cmd, t_token **current, t_list **args)
 		}
 		if (ft_is_valid_arg_token((*current)->type))
 		{
-			if (ft_process_argument(args, *current) == -1)
-				return (-1);
+			if (first_arg)
+			{
+				if (ft_process_first_argument(args, current) == -1)
+					return (-1);
+				first_arg = 0;
+			}
+			else
+			{
+				if (ft_process_concatenated_argument(args, current) == -1)
+					return (-1);
+			}
 		}
 		else if ((*current)->type == T_NONE)
 			return (-1);

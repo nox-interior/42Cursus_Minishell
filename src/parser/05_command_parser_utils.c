@@ -41,11 +41,69 @@ static int	ft_handle_heredoc_case(t_command *cmd, t_token **current,
 	return (1);
 }
 
+static int	ft_should_concatenate(t_token *current, t_token *next)
+{
+	if (!current || !next)
+		return (0);
+	if (ft_is_redirection(next->type) || next->type == T_PIPE)
+		return (0);
+	if (!ft_is_valid_arg_token(next->type))
+		return (0);
+	if (current->type == T_WORD && next->type == T_WORD)
+		return (0);
+	return (1);
+}
+
+static char	*ft_concatenate_tokens(t_token **current)
+{
+	char	*result;
+	char	*temp;
+	t_token	*token;
+
+	result = ft_strdup((*current)->value);
+	if (!result)
+		return (NULL);
+	token = (*current)->next;
+	while (token && ft_should_concatenate(*current, token))
+	{
+		temp = ft_strjoin(result, token->value);
+		free(result);
+		if (!temp)
+			return (NULL);
+		result = temp;
+		*current = token;
+		token = token->next;
+	}
+	return (result);
+}
+
 int	ft_process_argument(t_list **args, t_token *token)
 {
 	char	*dup;
 
 	dup = ft_strdup(token->value);
+	if (!dup)
+		return (-1);
+	ft_lstadd_back(args, ft_lstnew(dup));
+	return (1);
+}
+
+int	ft_process_concatenated_argument(t_list **args, t_token **current)
+{
+	char	*concatenated;
+
+	concatenated = ft_concatenate_tokens(current);
+	if (!concatenated)
+		return (-1);
+	ft_lstadd_back(args, ft_lstnew(concatenated));
+	return (1);
+}
+
+int	ft_process_first_argument(t_list **args, t_token **current)
+{
+	char	*dup;
+
+	dup = ft_strdup((*current)->value);
 	if (!dup)
 		return (-1);
 	ft_lstadd_back(args, ft_lstnew(dup));

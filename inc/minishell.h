@@ -145,6 +145,10 @@ void							ft_init_command(t_command *cmd);
 char							**ft_list_to_str_array(t_list *args);
 int								ft_process_argument(t_list **args,
 									t_token *token);
+int								ft_process_concatenated_argument(t_list **args,
+									t_token **current);
+int								ft_process_first_argument(t_list **args,
+									t_token **current);
 int								ft_process_redirection(t_command *cmd,
 									t_token **current);
 int								ft_process_redirection_extended(t_command *cmd,
