@@ -256,6 +256,7 @@ void							ft_print_fd_error(char *call);
 
 // Main
 char							*ft_get_user_input(void);
+char							*ft_read_line_from_stdin(void);
 int								ft_should_exit(char *line);
 void							ft_minishell_loop(t_shell *shell);
 

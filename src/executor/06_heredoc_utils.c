@@ -46,6 +46,29 @@ char	*ft_clean_delimit(char *delimit)
 	return (ft_strdup(delimit));
 }
 
+char	*ft_read_line_from_stdin(void)
+{
+	char	buffer[1024];
+	char	c;
+	int		i;
+	int		bytes_read;
+
+	i = 0;
+	while (i < 1023)
+	{
+		bytes_read = read(STDIN_FILENO, &c, 1);
+		if (bytes_read <= 0)
+			break ;
+		if (c == '\n')
+			break ;
+		buffer[i++] = c;
+	}
+	buffer[i] = '\0';
+	if (i == 0 && bytes_read <= 0)
+		return (NULL);
+	return (ft_strdup(buffer));
+}
+
 static int	ft_process_heredoc_line(char *line, int write_fd, int should_expand,
 		t_shell *shell)
 {
@@ -73,7 +96,10 @@ int	ft_read_heredoc_lines(int write_fd, char *delimit, t_shell *shell)
 	should_expand = ft_should_expand_vars(delimit);
 	while (1)
 	{
-		line = readline("> ");
+		if (isatty(STDIN_FILENO))
+			line = readline("> ");
+		else
+			line = ft_read_line_from_stdin();
 		if (!line || ft_strcmp(line, clean_delim) == 0)
 		{
 			free(line);

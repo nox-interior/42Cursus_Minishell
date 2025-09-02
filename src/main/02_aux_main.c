@@ -16,7 +16,7 @@ char	*ft_get_user_input(void)
 {
 	if (isatty(STDIN_FILENO))
 		return (readline("$ "));
-	return (get_next_line(STDIN_FILENO));
+	return (ft_read_line_from_stdin());
 }
 
 int	ft_should_exit(char *line)
