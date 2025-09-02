@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 12:42:05 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/09/02 18:36:10 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/09/02 19:46:55 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,23 @@ int	ft_process_redirection(t_command *cmd, t_token **current)
 	return (ft_process_redirection_extended(cmd, current, redir_target));
 }
 
+static int	ft_handle_argument_token(t_list **args, t_token **current,
+		int *first_arg)
+{
+	if (*first_arg)
+	{
+		if (ft_process_first_argument(args, current) == -1)
+			return (-1);
+		*first_arg = 0;
+	}
+	else
+	{
+		if (ft_process_concatenated_argument(args, current) == -1)
+			return (-1);
+	}
+	return (0);
+}
+
 int	ft_parse_command_body(t_command *cmd, t_token **current, t_list **args)
 {
 	int	first_arg;
@@ -39,17 +56,8 @@ int	ft_parse_command_body(t_command *cmd, t_token **current, t_list **args)
 		}
 		if (ft_is_valid_arg_token((*current)->type))
 		{
-			if (first_arg)
-			{
-				if (ft_process_first_argument(args, current) == -1)
-					return (-1);
-				first_arg = 0;
-			}
-			else
-			{
-				if (ft_process_concatenated_argument(args, current) == -1)
-					return (-1);
-			}
+			if (ft_handle_argument_token(args, current, &first_arg) == -1)
+				return (-1);
 		}
 		else if ((*current)->type == T_NONE)
 			return (-1);

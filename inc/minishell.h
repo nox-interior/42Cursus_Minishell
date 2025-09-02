@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 09:55:21 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/09/02 18:57:35 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/09/02 19:46:55 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,6 +161,8 @@ int								ft_process_first_argument(t_list **args,
 int								ft_process_redirection(t_command *cmd,
 									t_token **current);
 int								ft_process_redirection_extended(t_command *cmd,
+									t_token **current, char *redir_target);
+int								ft_handle_heredoc_case(t_command *cmd,
 									t_token **current, char *redir_target);
 char							**ft_list_to_str_array(t_list *args);
 int								ft_parse_command_body(t_command *cmd,

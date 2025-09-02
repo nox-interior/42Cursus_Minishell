@@ -6,7 +6,7 @@
 #    By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/02 16:26:23 by amarroyo          #+#    #+#              #
-#    Updated: 2025/09/02 18:57:35 by amarroyo         ###   ########.fr        #
+#    Updated: 2025/09/02 19:46:55 by amarroyo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,8 @@ PARSER		= $(SRC_DIR)parser/01_main_parser.c \
 			  $(SRC_DIR)parser/02_aux_parser.c \
 			  $(SRC_DIR)parser/03_command_parser.c \
 			  $(SRC_DIR)parser/04_free_parser.c \
-			  $(SRC_DIR)parser/05_command_parser_utils.c
+			  $(SRC_DIR)parser/05_command_parser_utils.c \
+			  $(SRC_DIR)parser/05_command_parser_utils_2.c
 
 EXIT		= $(SRC_DIR)exit/01_free.c \
 			  $(SRC_DIR)exit/02_error.c \

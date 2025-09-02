@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 00:00:00 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/09/02 18:36:10 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/09/02 19:46:55 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ static char	*ft_create_quoted_delimit(t_token *next_token, char *redir_target)
 	return (temp2);
 }
 
-static int	ft_handle_heredoc_case(t_command *cmd, t_token **current,
-	char *redir_target)
+int	ft_handle_heredoc_case(t_command *cmd, t_token **current,
+		char *redir_target)
 {
 	if ((*current)->next->type == T_S_QUOTE
 		|| (*current)->next->type == T_D_QUOTE)
@@ -77,17 +77,6 @@ static char	*ft_concatenate_tokens(t_token **current)
 	return (result);
 }
 
-int	ft_process_argument(t_list **args, t_token *token)
-{
-	char	*dup;
-
-	dup = ft_strdup(token->value);
-	if (!dup)
-		return (-1);
-	ft_lstadd_back(args, ft_lstnew(dup));
-	return (1);
-}
-
 int	ft_process_concatenated_argument(t_list **args, t_token **current)
 {
 	char	*concatenated;
@@ -96,60 +85,5 @@ int	ft_process_concatenated_argument(t_list **args, t_token **current)
 	if (!concatenated)
 		return (-1);
 	ft_lstadd_back(args, ft_lstnew(concatenated));
-	return (1);
-}
-
-int	ft_process_first_argument(t_list **args, t_token **current)
-{
-	char	*dup;
-
-	dup = ft_strdup((*current)->value);
-	if (!dup)
-		return (-1);
-	ft_lstadd_back(args, ft_lstnew(dup));
-	return (1);
-}
-
-char	**ft_list_to_str_array(t_list *args)
-{
-	int		size;
-	int		i;
-	char	**array;
-	t_list	*tmp;
-
-	size = ft_lstsize(args);
-	array = malloc(sizeof(char *) * (size + 1));
-	if (!array)
-		return (NULL);
-	tmp = args;
-	i = 0;
-	while (tmp)
-	{
-		array[i++] = ft_strdup((char *)tmp->content);
-		tmp = tmp->next;
-	}
-	array[i] = NULL;
-	return (array);
-}
-
-int	ft_process_redirection_extended(t_command *cmd, t_token **current,
-	char *redir_target)
-{
-	if ((*current)->type == T_REDIR_IN || (*current)->type == T_HEREDOC)
-	{
-		if ((*current)->type == T_HEREDOC)
-			ft_handle_heredoc_case(cmd, current, redir_target);
-		else
-		{
-			cmd->infile = redir_target;
-			cmd->heredoc = 0;
-		}
-	}
-	else
-	{
-		cmd->outfile = redir_target;
-		cmd->append = ((*current)->type == T_APPEND);
-	}
-	*current = (*current)->next->next;
 	return (1);
 }
