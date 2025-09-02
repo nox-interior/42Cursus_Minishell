@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 11:01:17 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/07/08 11:02:58 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/09/02 18:47:46 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static t_token	*ft_get_last_token(t_token *head)
 }
 
 static int	ft_handle_double_quote_token(t_token **tokens, const char *prompt,
-	int i, char *quoted, int quote_start)
+		int i, char *quoted, int quote_start)
 {
 	char	*rest;
 	char	*joined;
@@ -31,7 +31,8 @@ static int	ft_handle_double_quote_token(t_token **tokens, const char *prompt,
 	t_token	*last_token;
 	int		should_concatenate;
 
-	should_concatenate = (quote_start > 0 && !ft_isspace(prompt[quote_start - 1]));
+	should_concatenate = (quote_start > 0 && !ft_isspace(prompt[quote_start
+				- 1]));
 	start = i;
 	while (prompt[i] && !ft_isspace(prompt[i]) && prompt[i] != '|'
 		&& prompt[i] != '<' && prompt[i] != '>' && prompt[i] != '\''
@@ -96,7 +97,8 @@ int	ft_handle_quote_token(t_token **tokens, const char *prompt, int i)
 	if (!quoted)
 		return (-1);
 	if (quote == '"')
-		return (ft_handle_double_quote_token(tokens, prompt, i, quoted, quote_start));
+		return (ft_handle_double_quote_token(tokens, prompt, i, quoted,
+				quote_start));
 	else
 		return (ft_handle_single_quote_token(tokens, quoted, i));
 }
