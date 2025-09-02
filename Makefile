@@ -6,7 +6,7 @@
 #    By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/02 16:26:23 by amarroyo          #+#    #+#              #
-#    Updated: 2025/09/01 16:12:54 by amarroyo         ###   ########.fr        #
+#    Updated: 2025/09/02 18:57:35 by amarroyo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,8 @@ TOKENIZER	= $(SRC_DIR)tokenizer/01_tokenizer.c \
 			  $(SRC_DIR)tokenizer/03_types_tokenizer.c \
 			  $(SRC_DIR)tokenizer/04_sp_types_tokenizer.c \
 			  $(SRC_DIR)tokenizer/05_handles_tokenizer.c \
-			  $(SRC_DIR)tokenizer/06_handle_quotes.c
+			  $(SRC_DIR)tokenizer/06_handle_quotes.c \
+			  $(SRC_DIR)tokenizer/06_handle_quotes_utils.c
 
 VAR_EXP		= $(SRC_DIR)var_exp/01_var_exp.c
 

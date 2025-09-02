@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 09:55:21 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/09/02 18:36:10 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/09/02 18:57:35 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,15 @@ void							ft_dub_redir(t_token **token_list,
 void							ft_redir(t_token **token_list, const char c);
 int								ft_var_token(t_token **token_list,
 									const char *prompt, int i);
+
+// Quote handling utilities
+t_token							*ft_get_last_token(t_token *head);
+int								ft_should_concatenate_quote(const char *prompt,
+									int quote_start);
+int								ft_concat_with_last_token(t_token **tokens,
+									char *content);
+char							*ft_get_rest_after_quote(const char *prompt,
+									int *i);
 
 // Variable expansion
 char							*ft_var_with_dollar(const char *prompt,
