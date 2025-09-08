@@ -56,8 +56,20 @@ char	**ft_list_to_str_array(t_list *args)
 	return (array);
 }
 
+static void	ft_open_output_file(char *filename, int append)
+{
+	int	fd;
+
+	if (append)
+		fd = open(filename, O_WRONLY | O_CREAT | O_APPEND, 0644);
+	else
+		fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	if (fd != -1)
+		close(fd);
+}
+
 int	ft_process_redirection_extended(t_command *cmd, t_token **current,
-	char *redir_target)
+		char *redir_target)
 {
 	if ((*current)->type == T_REDIR_IN || (*current)->type == T_HEREDOC)
 	{
@@ -71,6 +83,8 @@ int	ft_process_redirection_extended(t_command *cmd, t_token **current,
 	}
 	else
 	{
+		if (cmd->outfile)
+			ft_open_output_file(cmd->outfile, cmd->append);
 		cmd->outfile = redir_target;
 		cmd->append = ((*current)->type == T_APPEND);
 	}
