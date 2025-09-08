@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 09:55:21 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/09/02 19:46:55 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/09/08 09:23:59 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,8 +180,10 @@ t_command						*ft_parse_command(t_token *token_list,
 
 // Signals
 void							ft_handle_sigint(int sig);
+void							ft_handle_sigint_exec(int sig);
 void							ft_handle_sigquit(int sig);
 void							ft_setup_interactive_signals(void);
+void							ft_setup_exec_signals(void);
 void							ft_setup_noninteractive_signals(void);
 void							ft_setup_signals(void);
 void							ft_setup_child_signals(void);
