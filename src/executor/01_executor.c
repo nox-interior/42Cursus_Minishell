@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 18:00:25 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/09/01 17:20:40 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/09/08 14:15:41 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,12 @@ int	ft_setup_output_redirection(t_command *cmd)
 			fd = open(cmd->outfile, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		if (fd == -1)
 		{
-			ft_puterror("Permission denied", cmd->outfile);
+			if (errno == ENOENT)
+				ft_puterror("No such file or directory", cmd->outfile);
+			else if (errno == EACCES)
+				ft_puterror("Permission denied", cmd->outfile);
+			else
+				ft_puterror("Permission denied", cmd->outfile);
 			return (-1);
 		}
 		dup2(fd, STDOUT_FILENO);
