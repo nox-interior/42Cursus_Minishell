@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 00:00:00 by nox               #+#    #+#             */
-/*   Updated: 2025/09/08 10:26:32 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/09/08 12:29:07 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,19 @@ static int	ft_check_cmd_access(char *full_path, char **dir, t_shell *shell)
 static char	**ft_get_path_dirs(const char *cmd, t_shell *shell)
 {
 	char	*path;
+	int		i;
 
-	path = getenv("PATH");
+	path = NULL;
+	i = 0;
+	while (shell->envp && shell->envp[i])
+	{
+		if (ft_strncmp(shell->envp[i], "PATH=", 5) == 0)
+		{
+			path = shell->envp[i] + 5;
+			break ;
+		}
+		i++;
+	}
 	if (!path)
 	{
 		ft_puterror("No such file or directory", (char *)cmd);
