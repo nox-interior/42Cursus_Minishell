@@ -241,6 +241,8 @@ char							*ft_find_in_path(const char *cmd,
 									t_shell *shell);
 char							*ft_get_cmd_path(t_command *cmd,
 									t_shell *shell);
+int								ft_validate_path(const char *path,
+									t_shell *shell);
 void							ft_fork_and_exec(t_command *cmd,
 									t_shell *shell);
 int								ft_setup_heredoc(t_command *cmd,

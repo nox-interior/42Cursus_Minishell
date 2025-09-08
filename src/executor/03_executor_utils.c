@@ -12,6 +12,31 @@
 
 #include "../../inc/minishell.h"
 
+int	ft_validate_path(const char *path, t_shell *shell)
+{
+	struct stat	path_stat;
+
+	if (stat(path, &path_stat) != 0)
+	{
+		ft_puterror("No such file or directory", (char *)path);
+		shell->exit_status = 127;
+		return (0);
+	}
+	if (S_ISDIR(path_stat.st_mode))
+	{
+		ft_puterror("Is a directory", (char *)path);
+		shell->exit_status = 126;
+		return (0);
+	}
+	if (access(path, X_OK) != 0)
+	{
+		ft_puterror("Permission denied", (char *)path);
+		shell->exit_status = 126;
+		return (0);
+	}
+	return (1);
+}
+
 static void	ft_handle_child_status(int status, t_shell *shell)
 {
 	if (WIFEXITED(status))
