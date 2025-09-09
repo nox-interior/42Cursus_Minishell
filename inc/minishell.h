@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 09:55:21 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/09/08 10:26:32 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/09/09 14:59:35 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
+# include <sys/stat.h>
 # include <sys/types.h>
 # include <sys/wait.h>
-# include <sys/stat.h>
 # include <unistd.h>
 
 extern volatile sig_atomic_t	g_signal;
@@ -88,6 +88,16 @@ typedef struct s_pipe_params
 	int							pipe_count;
 	t_shell						*shell;
 }								t_pipe_params;
+
+// Structure for quote token processing parameters
+typedef struct s_quote_params
+{
+	t_token						**tokens;
+	const char					*prompt;
+	int							i;
+	char						*quoted;
+	int							quote_start;
+}								t_quote_params;
 
 // Environment copy structure
 struct							s_shell

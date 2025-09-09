@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 11:01:17 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/09/02 18:57:35 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/09/09 14:59:35 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,24 +34,24 @@ static void	ft_process_quoted_without_rest(t_token **tokens, char *quoted,
 	if (should_concat)
 		ft_concat_with_last_token(tokens, quoted);
 	else
-		ft_add_token(tokens, ft_new_token(T_D_QUOTE, quoted));
+		ft_add_token(tokens, ft_new_token(T_WORD, quoted));
 }
 
-static int	ft_handle_double_quote_token(t_token **tokens, const char *prompt,
-		int i, char *quoted)
+static int	ft_handle_double_quote_token(t_quote_params *params)
 {
 	char	*rest;
 	int		should_concat;
-	int		quote_start;
 
-	quote_start = i - (ft_strlen(quoted) + 2);
-	should_concat = ft_should_concatenate_quote(prompt, quote_start);
-	rest = ft_get_rest_after_quote(prompt, &i);
+	should_concat = ft_should_concatenate_quote(params->prompt,
+			params->quote_start);
+	rest = ft_get_rest_after_quote(params->prompt, &(params->i));
 	if (rest)
-		ft_process_quoted_with_rest(tokens, quoted, rest, should_concat);
+		ft_process_quoted_with_rest(params->tokens, params->quoted, rest,
+			should_concat);
 	else
-		ft_process_quoted_without_rest(tokens, quoted, should_concat);
-	return (i);
+		ft_process_quoted_without_rest(params->tokens, params->quoted,
+			should_concat);
+	return (params->i);
 }
 
 static int	ft_handle_single_quote_token(t_token **tokens, char *quoted, int i)
@@ -62,15 +62,23 @@ static int	ft_handle_single_quote_token(t_token **tokens, char *quoted, int i)
 
 int	ft_handle_quote_token(t_token **tokens, const char *prompt, int i)
 {
-	char	quote;
-	char	*quoted;
+	char			quote;
+	char			*quoted;
+	t_quote_params	params;
 
+	params.quote_start = i;
 	quote = prompt[i];
 	quoted = ft_quotes_token(prompt, &i);
 	if (!quoted)
 		return (-1);
 	if (quote == '"')
-		return (ft_handle_double_quote_token(tokens, prompt, i, quoted));
+	{
+		params.tokens = tokens;
+		params.prompt = prompt;
+		params.i = i;
+		params.quoted = quoted;
+		return (ft_handle_double_quote_token(&params));
+	}
 	else
 		return (ft_handle_single_quote_token(tokens, quoted, i));
 }
