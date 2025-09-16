@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 00:00:00 by nox               #+#    #+#             */
-/*   Updated: 2025/09/08 10:26:32 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/09/16 12:02:25 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ void	ft_fork_and_exec(t_command *cmd, t_shell *shell)
 	if (pid < 0)
 	{
 		ft_handle_fork_error(shell);
+		if (cmd_path != cmd->argv[0])
+			free(cmd_path);
 		return ;
 	}
 	if (pid == 0)
@@ -82,4 +84,6 @@ void	ft_fork_and_exec(t_command *cmd, t_shell *shell)
 	waitpid(pid, &status, 0);
 	ft_setup_signals();
 	ft_handle_child_status(status, shell);
+	if (cmd_path != cmd->argv[0])
+		free(cmd_path);
 }

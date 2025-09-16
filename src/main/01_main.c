@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 09:42:39 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/09/01 17:16:58 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/09/16 12:02:25 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,5 +82,6 @@ int	main(int argc, char **argv, char **envp)
 	ft_setup_signals();
 	g_signal = 0;
 	ft_minishell_loop(&shell);
+	ft_free_split(shell.envp);
 	return (shell.exit_status);
 }

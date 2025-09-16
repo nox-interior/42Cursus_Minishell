@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 11:08:43 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/09/08 09:23:59 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/09/16 12:02:25 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ static void	ft_setup_and_exec(t_pipe_params *params)
 	if (!cmd_path)
 		exit(127);
 	execve(cmd_path, params->current->argv, params->shell->envp);
+	if (cmd_path != params->current->argv[0])
+		free(cmd_path);
 	exit(127);
 }
 

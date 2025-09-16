@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 13:04:16 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/06/30 13:12:20 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/09/16 12:02:25 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,17 @@ static void	ft_copy_if_not_removed(char **src, char **dst, const char *name)
 void	ft_remove_env_var(t_shell *shell, const char *name)
 {
 	int		count;
+	int		i;
 	char	**old_env;
 	char	**new_env;
 
 	old_env = shell->envp;
 	count = ft_count_env(old_env);
+	i = 0;
+	while (old_env[i] && !ft_should_remove(old_env[i], name))
+		i++;
+	if (old_env[i])
+		count--;
 	new_env = ft_alloc_env_copy(count);
 	if (!new_env)
 		return ;
