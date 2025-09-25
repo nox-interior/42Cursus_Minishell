@@ -6,12 +6,11 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 00:00:00 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/09/25 20:34:06 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/09/25 20:56:30 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <termios.h>
-#include <unistd.h>
+#include "minishell.h"
 
 void	ft_disable_echoctl(void)
 {

@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 09:55:21 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/09/25 20:42:53 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/09/25 20:56:56 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,11 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <unistd.h>
+# include <termios.h>
+
+# ifndef ECHOCTL
+#  define ECHOCTL 0001000
+# endif
 
 extern volatile sig_atomic_t	g_signal;
 
