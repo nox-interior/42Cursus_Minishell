@@ -6,11 +6,28 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 12:00:00 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/08/19 15:07:19 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/09/25 20:41:28 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+// Handler para SIGQUIT durante la ejecución: no hace nada
+void	ft_handle_sigquit_exec(int sig)
+{
+	(void)sig;
+}
+
+// Handler para SIGQUIT en el prompt: redibuja el prompt
+void	ft_handle_sigquit_prompt(int sig)
+{
+	(void)sig;
+	if (isatty(STDIN_FILENO))
+	{
+		rl_on_new_line();
+		rl_redisplay();
+	}
+}
 
 void	ft_setup_noninteractive_signals(void)
 {

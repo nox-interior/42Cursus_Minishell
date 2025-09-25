@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 00:00:00 by nox               #+#    #+#             */
-/*   Updated: 2025/09/16 12:02:25 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/09/25 20:34:03 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,22 @@ int	ft_validate_path(const char *path, t_shell *shell)
 
 static void	ft_handle_child_status(int status, t_shell *shell)
 {
+	int	sig;
+
 	if (WIFEXITED(status))
 		shell->exit_status = WEXITSTATUS(status);
 	else if (WIFSIGNALED(status))
-		shell->exit_status = 128 + WTERMSIG(status);
+	{
+		sig = WTERMSIG(status);
+		shell->exit_status = 128 + sig;
+		if (sig == SIGQUIT)
+			write(2, "Quit (core dumped)\n", 19);
+	}
 }
 
 static void	ft_exec_child_process(t_command *cmd, t_shell *shell, char *path)
 {
+	ft_enable_echoctl();
 	ft_setup_child_signals();
 	if (ft_setup_redirection(cmd, shell) == -1)
 		exit(1);

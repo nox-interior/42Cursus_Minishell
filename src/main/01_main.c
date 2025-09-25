@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 09:42:39 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/09/16 12:02:25 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/09/25 20:33:49 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static t_token	*ft_read_and_tokenize(t_shell *shell, char **line)
 {
 	t_token	*tokens;
 
+	ft_disable_echoctl();
 	*line = ft_get_user_input();
 	if (!*line)
 		return (NULL);
@@ -79,9 +80,11 @@ int	main(int argc, char **argv, char **envp)
 	if (!shell.envp)
 		return (perror("minishell: malloc"), 1);
 	shell.exit_status = 0;
+	ft_disable_echoctl();
 	ft_setup_signals();
 	g_signal = 0;
 	ft_minishell_loop(&shell);
+	ft_enable_echoctl();
 	ft_free_split(shell.envp);
 	return (shell.exit_status);
 }
