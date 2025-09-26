@@ -6,7 +6,7 @@
 #    By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/02 16:26:23 by amarroyo          #+#    #+#              #
-#    Updated: 2025/09/25 19:52:19 by amarroyo         ###   ########.fr        #
+#    Updated: 2025/09/26 11:28:49 by amarroyo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,8 +28,7 @@ LIBFT		= $(LIBFT_DIR)/libft.a
 
 # Source files
 MAIN		= $(SRC_DIR)main/01_main.c \
-			  $(SRC_DIR)main/02_aux_main.c \
-			  $(SRC_DIR)main/03_termios_utils.c
+			  $(SRC_DIR)main/02_aux_main.c 
 
 TOKENIZER	= $(SRC_DIR)tokenizer/01_tokenizer.c \
 			  $(SRC_DIR)tokenizer/02_create_tokenizer.c \
@@ -52,7 +51,8 @@ EXIT		= $(SRC_DIR)exit/01_free.c \
 			  $(SRC_DIR)exit/02_error.c \
 
 SIGNALS		= $(SRC_DIR)signals/01_signals.c \
-			  $(SRC_DIR)signals/02_signals_setup.c
+			  $(SRC_DIR)signals/02_signals_setup.c \
+			  $(SRC_DIR)signals/03_termios_utils.c
 
 EXECUTOR	= $(SRC_DIR)executor/01_executor.c \
 			  $(SRC_DIR)executor/02_builtin_executor.c \
