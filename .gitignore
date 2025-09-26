@@ -6,3 +6,4 @@
 token_discarded_functions.c
 *.txt
 *.sh
+*.log
