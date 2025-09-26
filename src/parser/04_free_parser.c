@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 12:39:34 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/09/01 17:22:19 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/09/26 16:00:40 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	ft_free_command_partial(t_command *cmd, t_list *args)
 {
 	if (cmd)
 	{
+		ft_free_str_array(cmd->argv);
 		if (cmd->infile)
 			free(cmd->infile);
 		if (cmd->outfile)
@@ -30,15 +31,9 @@ void	ft_free_command_partial(t_command *cmd, t_list *args)
 
 static void	ft_free_command_content(t_command *cmd)
 {
-	int	i;
-
-	if (cmd->argv)
-	{
-		i = 0;
-		while (cmd->argv[i])
-			free(cmd->argv[i++]);
-		free(cmd->argv);
-	}
+	if (!cmd)
+		return;
+	ft_free_str_array(cmd->argv);
 	if (cmd->infile)
 		free(cmd->infile);
 	if (cmd->outfile)
@@ -48,6 +43,27 @@ static void	ft_free_command_content(t_command *cmd)
 	if (cmd->heredoc_fd != -1)
 		close(cmd->heredoc_fd);
 }
+
+// static void	ft_free_command_content(t_command *cmd)
+// {
+// 	int	i;
+
+// 	if (cmd->argv)
+// 	{
+// 		i = 0;
+// 		while (cmd->argv[i])
+// 			free(cmd->argv[i++]);
+// 		free(cmd->argv);
+// 	}
+// 	if (cmd->infile)
+// 		free(cmd->infile);
+// 	if (cmd->outfile)
+// 		free(cmd->outfile);
+// 	if (cmd->delimit)
+// 		free(cmd->delimit);
+// 	if (cmd->heredoc_fd != -1)
+// 		close(cmd->heredoc_fd);
+// }
 
 void	ft_free_command_list(t_command **cmd_list)
 {

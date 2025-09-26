@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 13:16:28 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/06/30 13:45:23 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/09/26 16:37:44 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,16 @@ int	ft_exec_builtin_exit(t_command *cmd, t_shell *shell)
 	if (isatty(STDIN_FILENO))
 		ft_putendl_fd("exit", STDERR_FILENO);
 	if (!cmd->argv[1])
+	{
+		ft_cleanup_shell(shell);
 		exit(shell->exit_status);
+	}
 	if (!ft_is_numeric_string(cmd->argv[1]))
 	{
 		ft_putstr_fd("minishell: exit: ", 2);
 		ft_putstr_fd(cmd->argv[1], 2);
 		ft_putendl_fd(": numeric argument required", 2);
+		ft_cleanup_shell(shell); 
 		exit(2);
 	}
 	if (cmd->argv[2])
@@ -52,5 +56,6 @@ int	ft_exec_builtin_exit(t_command *cmd, t_shell *shell)
 		return (1);
 	}
 	code = ft_atoi(cmd->argv[1]);
+	ft_cleanup_shell(shell); 
 	exit((unsigned char)code);
 }

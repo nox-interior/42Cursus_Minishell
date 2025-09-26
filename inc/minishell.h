@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 09:55:21 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/09/26 14:57:43 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/09/26 16:42:02 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,8 @@ struct							s_shell
 {
 	char						**envp;
 	int							exit_status;
+	t_token						*live_tokens;
+	t_command					*live_commands;
 };
 
 // Tokenizer
@@ -284,6 +286,8 @@ void							ft_execute_pipeline(t_command *cmd_list,
 // Exit and Free
 void							ft_free_token_list(t_token **tokens);
 void							ft_free_split(char **s);
+void							ft_free_str_array(char **v);
+void							ft_cleanup_shell(t_shell *shell);
 void							ft_puterror(char *err, char *cmd);
 void							ft_print_exec_error(char *cmd);
 void							ft_print_fd_error(char *call);

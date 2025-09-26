@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 09:42:39 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/09/25 20:33:49 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/09/26 16:44:50 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ static t_token	*ft_read_and_tokenize(t_shell *shell, char **line)
 {
 	t_token	*tokens;
 
-	ft_disable_echoctl();
 	*line = ft_get_user_input();
 	if (!*line)
 		return (NULL);
@@ -26,10 +25,8 @@ static t_token	*ft_read_and_tokenize(t_shell *shell, char **line)
 	if (!tokens)
 	{
 		shell->exit_status = 2;
-		free(*line);
 		return (NULL);
 	}
-	free(*line);
 	return (tokens);
 }
 
@@ -44,7 +41,11 @@ static void	ft_parse_and_execute(t_token *tokens, t_shell *shell)
 		ft_free_token_list(&tokens);
 		return ;
 	}
+	shell->live_tokens = tokens;
+	shell->live_commands = commands;
 	ft_executor(commands, shell);
+	shell->live_tokens = NULL;
+	shell->live_commands = NULL;
 	ft_free_token_list(&tokens);
 	ft_free_command_list(&commands);
 }
@@ -63,9 +64,16 @@ void	ft_minishell_loop(t_shell *shell)
 		}
 		tokens = ft_read_and_tokenize(shell, &line);
 		if (ft_should_exit(line))
+		{
+			free(line);
 			break ;
+		}
 		if (!tokens)
+		{
+			free(line);
 			continue ;
+		}
+		free(line);
 		ft_parse_and_execute(tokens, shell);
 	}
 }
@@ -80,6 +88,8 @@ int	main(int argc, char **argv, char **envp)
 	if (!shell.envp)
 		return (perror("minishell: malloc"), 1);
 	shell.exit_status = 0;
+	shell.live_tokens = NULL;
+	shell.live_commands = NULL;
 	ft_disable_echoctl();
 	ft_setup_signals();
 	g_signal = 0;
