@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 11:08:43 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/09/16 12:02:25 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/09/26 12:37:22 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,9 @@ void	ft_execute_pipeline(t_command *cmd_list, t_shell *shell)
 		return ;
 	ft_execute_all_commands(cmd_list, pipes, pipe_count, shell);
 	ft_close_all_pipes(pipes, pipe_count);
-	ft_setup_exec_signals();
+	if (isatty(STDIN_FILENO))
+		ft_setup_exec_signals();
 	ft_wait_all_children(pipe_count + 1);
-	ft_setup_signals();
+	if (isatty(STDIN_FILENO))
+		ft_setup_signals();
 }

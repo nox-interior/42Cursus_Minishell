@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 10:47:58 by amarroyo          #+#    #+#             */
-/*   Updated: 2025/09/25 20:41:19 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/09/26 12:16:18 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_handle_sigint(int sig)
 {
 	(void)sig;
 	g_signal = SIGINT + 128;
-	write(1, "^C\n", 3);
+	write(1, "$ ^C\n", 5);
 	rl_replace_line("", 0);
 	rl_on_new_line();
 	rl_redisplay();

@@ -6,7 +6,7 @@
 /*   By: amarroyo <amarroyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 00:00:00 by nox               #+#    #+#             */
-/*   Updated: 2025/09/25 20:34:03 by amarroyo         ###   ########.fr       */
+/*   Updated: 2025/09/26 12:57:38 by amarroyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,11 @@ void	ft_fork_and_exec(t_command *cmd, t_shell *shell)
 	}
 	if (pid == 0)
 		ft_exec_child_process(cmd, shell, cmd_path);
-	ft_setup_exec_signals();
+	if (isatty(STDIN_FILENO))
+		ft_setup_exec_signals();
 	waitpid(pid, &status, 0);
-	ft_setup_signals();
+	if (isatty(STDIN_FILENO))
+		ft_setup_signals();
 	ft_handle_child_status(status, shell);
 	if (cmd_path != cmd->argv[0])
 		free(cmd_path);
