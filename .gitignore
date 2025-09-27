@@ -1,6 +1,0 @@
-.vscode
-./a.out
-.gitignore
-*.wps
-*.md
-token_discarded_functions.c
